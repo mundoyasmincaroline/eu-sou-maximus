@@ -52,17 +52,14 @@ function Mentoria() {
               </a>
             </div>
           </div>
-          <div className="mt-10 lg:mt-0 relative aspect-[4/5] w-full max-w-sm mx-auto overflow-hidden rounded-2xl ring-1 ring-gold/30 shadow-luxe">
-            {/* A placeholder for the reel or a dynamic embed. For now linking to the reel thumbnail/cover */}
-            <a href="https://www.instagram.com/eusoumaximus/reel/DZ2G18aJQ2q/" target="_blank" rel="noopener noreferrer" className="block h-full w-full">
-              <img src={mentoria} alt="Você não é pobre, você só tem mau gosto" className="h-full w-full object-cover opacity-80 hover:scale-105 transition-transform duration-700" />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="grid h-16 w-16 place-items-center rounded-full gradient-gold text-[oklch(0.12_0.012_30)] shadow-glow-gold hover:scale-110 transition-transform">
-                  <Play className="h-6 w-6 fill-current" />
-                </span>
-              </div>
-            </a>
+          <div className="mt-10 lg:mt-0 relative aspect-[4/5] w-full max-w-sm mx-auto overflow-hidden rounded-2xl ring-1 ring-gold/30 shadow-luxe bg-white">
+            <iframe
+              src="https://www.instagram.com/p/DZ2G18aJQ2q/embed"
+              className="absolute inset-0 w-full h-full"
+              frameBorder="0"
+              scrolling="no"
+              allowTransparency={true}
+            ></iframe>
           </div>
         </div>
       </section>
