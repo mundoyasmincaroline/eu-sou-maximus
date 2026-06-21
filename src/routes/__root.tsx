@@ -123,7 +123,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <div className="relative min-h-screen">
         <Navbar />
-        <main className="pt-18">
+        <main className="pt-20">
           <Outlet />
         </main>
         <Footer />

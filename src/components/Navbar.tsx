@@ -17,7 +17,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-[oklch(0.78_0.13_82/0.12)] bg-[oklch(0.1_0.012_30/0.7)] backdrop-blur-xl">
-      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-5 py-3 lg:px-10">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 py-3 lg:px-10">
         <Logo />
         <nav className="hidden items-center gap-7 lg:flex">
           {NAV.map((n) => (
