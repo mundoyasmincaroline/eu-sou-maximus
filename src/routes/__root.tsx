@@ -11,6 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Navbar } from "../components/Navbar";
+import { Footer } from "../components/Footer";
 
 function NotFoundComponent() {
   return (
@@ -77,13 +79,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "MAXIMUS · Karlos Edward — Apresentador & Influenciador" },
+      { name: "description", content: "Site oficial de Karlos Edward, o MAXIMUS — apresentador do programa Me Chama Que Eu Vou, influenciador, mentor e host de eventos como o Maximus Experience Country." },
+      { name: "author", content: "MAXIMUS" },
+      { name: "theme-color", content: "#0a0a0a" },
+      { property: "og:title", content: "MAXIMUS · Karlos Edward" },
+      { property: "og:description", content: "Apresentador do Me Chama Que Eu Vou. Parcerias, eventos e mentorias." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
@@ -118,8 +121,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="relative min-h-screen">
+        <Navbar />
+        <main className="pt-20">
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
     </QueryClientProvider>
   );
 }
