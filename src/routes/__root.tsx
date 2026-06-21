@@ -83,11 +83,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Site oficial de Karlos Edward, o MAXIMUS — apresentador do programa Me Chama Que Eu Vou, influenciador, mentor e host de eventos como o Maximus Experience Country." },
       { name: "author", content: "MAXIMUS" },
       { name: "theme-color", content: "#0a0a0a" },
-      { property: "og:title", content: "MAXIMUS · Karlos Edward" },
-      { property: "og:description", content: "Apresentador do Me Chama Que Eu Vou. Parcerias, eventos e mentorias." },
+      { property: "og:title", content: "MAXIMUS · Karlos Edward — Apresentador & Influenciador" },
+      { property: "og:description", content: "Site oficial de Karlos Edward, o MAXIMUS — apresentador do programa Me Chama Que Eu Vou, influenciador, mentor e host de eventos como o Maximus Experience Country." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "MAXIMUS · Karlos Edward — Apresentador & Influenciador" },
+      { name: "twitter:description", content: "Site oficial de Karlos Edward, o MAXIMUS — apresentador do programa Me Chama Que Eu Vou, influenciador, mentor e host de eventos como o Maximus Experience Country." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b33bc88c-a240-410b-9381-d57de1d8b247" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b33bc88c-a240-410b-9381-d57de1d8b247" },
     ],
     links: [
       {
