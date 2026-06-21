@@ -33,6 +33,40 @@ function Mentoria() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-7xl px-5 py-16 lg:px-10">
+        <div className="relative overflow-hidden rounded-3xl border border-gold/20 bg-card/40 p-8 md:p-12 lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
+          <div>
+            <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.4em] text-gold">
+              Quadro Exclusivo
+            </div>
+            <h2 className="mt-4 font-display text-4xl font-bold leading-tight md:text-5xl">
+              Você não é pobre, <br />
+              <span className="italic text-gradient-gold">você só tem mau gosto!</span>
+            </h2>
+            <p className="mt-6 text-muted-foreground leading-relaxed">
+              O quadro que conquistou a internet e virou pilar da mentoria. Karlos Edward analisa moda, estilo e posicionamento de forma direta, ácida e transformadora. Descubra como a sua imagem fala antes de você abrir a boca.
+            </p>
+            <div className="mt-8">
+              <a href="https://www.instagram.com/eusoumaximus/reel/DZ2G18aJQ2q/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-gold/40 px-6 py-3 text-sm font-semibold text-foreground hover:bg-gold/10">
+                Assistir ao Reel no Instagram <ArrowRight className="h-4 w-4 text-gold" />
+              </a>
+            </div>
+          </div>
+          <div className="mt-10 lg:mt-0 relative aspect-[4/5] w-full max-w-sm mx-auto overflow-hidden rounded-2xl ring-1 ring-gold/30 shadow-luxe">
+            {/* A placeholder for the reel or a dynamic embed. For now linking to the reel thumbnail/cover */}
+            <a href="https://www.instagram.com/eusoumaximus/reel/DZ2G18aJQ2q/" target="_blank" rel="noopener noreferrer" className="block h-full w-full">
+              <img src={mentoria} alt="Você não é pobre, você só tem mau gosto" className="h-full w-full object-cover opacity-80 hover:scale-105 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="grid h-16 w-16 place-items-center rounded-full gradient-gold text-[oklch(0.12_0.012_30)] shadow-glow-gold hover:scale-110 transition-transform">
+                  <Play className="h-6 w-6 fill-current" />
+                </span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-3 lg:px-10 lg:py-24">
         {[
           { title: "Pílula", level: "1 sessão estratégica", price: "Sob consulta", desc: "Diagnóstico rápido de posicionamento e plano de ação imediato.", items: ["Diagnóstico de marca pessoal", "Plano de 30 dias", "1h ao vivo com Max"] },

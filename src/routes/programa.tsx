@@ -16,13 +16,24 @@ export const Route = createFileRoute("/programa")({
   component: Programa,
 });
 
-const EPISODES = Array.from({ length: 6 }).map((_, i) => ({
-  n: String(i + 1).padStart(2, "0"),
-  title: ["O encontro que ninguém esperava", "Bastidores do palco country", "Marcas que viraram cultura", "A noite mais comentada do ano", "Convidado surpresa & brincadeiras", "Networking sem firula"][i],
-  guest: ["Convidado especial", "Influência & moda", "Empreendedor do ano", "Artista revelação", "Personalidade local", "Mentor de negócios"][i],
-  duration: ["32 min", "28 min", "41 min", "26 min", "37 min", "33 min"][i],
-  img: i % 2 ? programBg : heroStage,
-}));
+const EPISODES = [
+  {
+    n: "01",
+    title: "Episódio 1 - Circo do Dedé Santana",
+    guest: "Pará de Minas",
+    duration: "Instagram",
+    img: programBg,
+    link: "https://www.instagram.com/p/DZ02LcLJKlR/"
+  },
+  ...Array.from({ length: 5 }).map((_, i) => ({
+    n: String(i + 2).padStart(2, "0"),
+    title: ["Bastidores do palco country", "Marcas que viraram cultura", "A noite mais comentada do ano", "Convidado surpresa & brincadeiras", "Networking sem firula"][i],
+    guest: ["Influência & moda", "Empreendedor do ano", "Artista revelação", "Personalidade local", "Mentor de negócios"][i],
+    duration: ["28 min", "41 min", "26 min", "37 min", "33 min"][i],
+    img: i % 2 ? heroStage : programBg,
+    link: "#"
+  }))
+];
 
 function Programa() {
   return (
@@ -56,18 +67,18 @@ function Programa() {
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {EPISODES.map((e) => (
             <article key={e.n} className="group relative overflow-hidden rounded-2xl border border-gold/15 bg-card/60 backdrop-blur transition-all hover:-translate-y-1 hover:border-gold/50 hover:shadow-glow-gold">
-              <div className="relative aspect-video overflow-hidden">
+              <a href={e.link} target="_blank" rel="noopener noreferrer" className="block relative aspect-video overflow-hidden">
                 <img src={e.img} alt={e.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
                 <div className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-background/60 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-gold backdrop-blur">
                   EP · {e.n}
                 </div>
-                <button className="absolute inset-0 grid place-items-center opacity-0 transition-opacity group-hover:opacity-100">
+                <div className="absolute inset-0 grid place-items-center opacity-0 transition-opacity group-hover:opacity-100">
                   <span className="grid h-16 w-16 place-items-center rounded-full gradient-gold text-[oklch(0.12_0.012_30)] shadow-glow-gold">
                     <Play className="h-6 w-6 fill-current" />
                   </span>
-                </button>
-              </div>
+                </div>
+              </a>
               <div className="p-6">
                 <h3 className="font-display text-xl font-bold leading-snug">{e.title}</h3>
                 <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
