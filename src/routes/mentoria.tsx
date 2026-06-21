@@ -3,7 +3,6 @@ import { GraduationCap, Check, ArrowRight, Crown } from "lucide-react";
 import mentoria from "@/assets/mentoria.jpg";
 import textureGold from "@/assets/texture-gold.jpg";
 import { SectionHeader } from "@/components/SectionHeader";
-
 export const Route = createFileRoute("/mentoria")({
   head: () => ({
     meta: [

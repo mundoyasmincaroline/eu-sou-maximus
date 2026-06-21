@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Play, Mic, Calendar, ArrowRight } from "lucide-react";
+import { Mic, Calendar, ArrowRight } from "lucide-react";
 import programBg from "@/assets/program-bg.jpg";
 import heroStage from "@/assets/hero-stage.jpg";
 import { SectionHeader } from "@/components/SectionHeader";
