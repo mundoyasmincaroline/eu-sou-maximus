@@ -1,10 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { GraduationCap, Check, ArrowRight, Crown, Play } from "lucide-react";
-import mentoria from "@/assets/mentoria.jpg";
 import textureGold from "@/assets/texture-gold.jpg";
 import { SectionHeader } from "@/components/SectionHeader";
 import { VideoModal } from "@/components/VideoModal";
+import { useCmsContent } from "@/lib/cmsContent";
 export const Route = createFileRoute("/mentoria")({
   head: () => ({
     meta: [
@@ -19,19 +19,20 @@ export const Route = createFileRoute("/mentoria")({
 
 function Mentoria() {
   const [activeEmbed, setActiveEmbed] = useState<string | null>(null);
+  const cms = useCmsContent();
 
   return (
     <div className="overflow-hidden">
       <section className="relative isolate py-24 lg:py-32">
-        <img src={mentoria} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-40" />
+        <img src={cms.mentoria.heroImage} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-40" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/60 to-background" />
         <div className="mx-auto max-w-7xl px-5 lg:px-10">
           <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 px-4 py-1.5 text-[11px] uppercase tracking-[0.32em] text-gold"><GraduationCap className="h-3 w-3" /> Mentoria</div>
           <h1 className="mt-6 font-display text-[clamp(3rem,8vw,7rem)] font-black leading-[0.92]">
-            Posicionamento <br /><span className="italic text-gradient-gold">de palco.</span>
+            {cms.mentoria.heroTitle.split(" ").slice(0, 1).join(" ")} <br /><span className="italic text-gradient-gold">{cms.mentoria.heroTitle.split(" ").slice(1).join(" ")}</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            "Você não é POBRE, você só tem MAU posicionamento." Mentoria sem firula, com método e direção, para quem quer transformar presença em palco e palco em resultado.
+            {cms.mentoria.heroDescription}
           </p>
         </div>
       </section>
@@ -43,11 +44,11 @@ function Mentoria() {
               Quadro Exclusivo
             </div>
             <h2 className="mt-4 font-display text-4xl font-bold leading-tight md:text-5xl">
-              Você não é pobre, <br />
-              <span className="italic text-gradient-gold">você só tem mau gosto!</span>
+              {cms.mentoria.featureTitle.split(",")[0]}, <br />
+              <span className="italic text-gradient-gold">{cms.mentoria.featureTitle.split(",").slice(1).join(",") || cms.mentoria.featureTitle}</span>
             </h2>
             <p className="mt-6 text-muted-foreground leading-relaxed">
-              O quadro que conquistou a internet e virou pilar da mentoria. Karlos Edward analisa moda, estilo e posicionamento de forma direta, ácida e transformadora. Descubra como a sua imagem fala antes de você abrir a boca.
+              {cms.mentoria.featureDescription}
             </p>
             <div className="mt-8">
               <a href="https://www.instagram.com/eusoumaximus/reel/DZ2G18aJQ2q/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-gold/40 px-6 py-3 text-sm font-semibold text-foreground hover:bg-gold/10">
@@ -55,8 +56,8 @@ function Mentoria() {
               </a>
             </div>
           </div>
-          <div className="mt-10 lg:mt-0 relative aspect-[4/5] w-full max-w-sm mx-auto overflow-hidden rounded-2xl ring-1 ring-gold/30 shadow-luxe cursor-pointer group" onClick={() => setActiveEmbed("DZ2G18aJQ2q")}>
-            <img src={mentoria} alt="Você não é pobre, você só tem mau gosto" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90" />
+          <div className="mt-10 lg:mt-0 relative aspect-[4/5] w-full max-w-sm mx-auto overflow-hidden rounded-2xl ring-1 ring-gold/30 shadow-luxe cursor-pointer group" onClick={() => setActiveEmbed(cms.mentoria.featureEmbedId)}>
+            <img src={cms.mentoria.featureImage} alt="Você não é pobre, você só tem mau gosto" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90" />
             <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent" />
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="grid h-16 w-16 place-items-center rounded-full gradient-gold text-[oklch(0.12_0.012_30)] shadow-glow-gold transition-transform duration-300 group-hover:scale-110">
@@ -74,12 +75,8 @@ function Mentoria() {
       />
 
       <section className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-3 lg:px-10 lg:py-24">
-        {[
-          { title: "Pílula", level: "1 sessão estratégica", price: "Sob consulta", desc: "Diagnóstico rápido de posicionamento e plano de ação imediato.", items: ["Diagnóstico de marca pessoal", "Plano de 30 dias", "1h ao vivo com Max"] },
-          { title: "Imersão", level: "4 semanas", price: "Vagas limitadas", desc: "Mergulho profundo em palco, câmera, narrativa e parcerias.", items: ["4 sessões 1:1", "Roteiro de palco e câmera", "Pitch de parceria pronto", "Suporte WhatsApp"], featured: true },
-          { title: "Trono", level: "Programa anual VIP", price: "Convite", desc: "Acompanhamento contínuo + acesso a eventos fechados Maximus.", items: ["Acompanhamento mensal", "Acesso a Maximus Night", "Curadoria de parcerias", "Posicionamento de marca completo"] },
-        ].map((p) => (
-          <div key={p.title} className={`relative flex flex-col overflow-hidden rounded-3xl border p-8 backdrop-blur ${p.featured ? "border-gold/60 shadow-glow-gold" : "border-gold/15 bg-card/60"}`}>
+        {cms.mentoria.plans.map((p) => (
+          <div key={p.id} className={`relative flex flex-col overflow-hidden rounded-3xl border p-8 backdrop-blur ${p.featured ? "border-gold/60 shadow-glow-gold" : "border-gold/15 bg-card/60"}`}>
             {p.featured && (
               <>
                 <img src={textureGold} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-30" />
@@ -89,7 +86,7 @@ function Mentoria() {
             )}
             <div className="text-[11px] uppercase tracking-[0.3em] text-gold">{p.level}</div>
             <h3 className="mt-3 font-display text-3xl font-bold">{p.title}</h3>
-            <div className="mt-2 text-sm text-muted-foreground">{p.desc}</div>
+            <div className="mt-2 text-sm text-muted-foreground">{p.description}</div>
             <div className="mt-6 font-display text-2xl text-gradient-gold">{p.price}</div>
             <ul className="mt-6 flex-1 space-y-3 text-sm">
               {p.items.map((i) => (
@@ -104,7 +101,7 @@ function Mentoria() {
       </section>
 
       <section className="mx-auto max-w-5xl px-5 pb-24 text-center lg:px-10">
-        <SectionHeader align="center" eyebrow="Para quem" title={<>Feita pra quem <span className="italic text-gradient-gold">já decidiu crescer.</span></>} description="Apresentadores, criadores de conteúdo, empreendedores e profissionais que querem ocupar palco e construir uma marca pessoal premium." />
+        <SectionHeader align="center" eyebrow="Para quem" title={<>Feita pra quem <span className="italic text-gradient-gold">já decidiu crescer.</span></>} description={cms.mentoria.audienceDescription} />
       </section>
     </div>
   );
