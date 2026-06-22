@@ -30,8 +30,8 @@ function AdminPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  async function handleLogin(event: FormEvent) {
-    event.preventDefault();
+  async function handleLogin(event?: FormEvent) {
+    event?.preventDefault();
     setError("");
     const passwordHash = await sha256(password);
     if (email.trim().toLowerCase() === ADMIN_EMAIL && passwordHash === ADMIN_PASSWORD_SHA256) {
@@ -58,7 +58,7 @@ function AdminPage() {
               <input value={password} onChange={(e) => setPassword(e.target.value)} className="admin-input" type="password" autoComplete="current-password" />
             </Field>
             {error && <p className="rounded-xl border border-crimson/40 bg-crimson/10 px-4 py-3 text-sm text-foreground">{error}</p>}
-            <button className="inline-flex w-full items-center justify-center gap-2 rounded-full gradient-gold px-6 py-3.5 text-sm font-bold text-[oklch(0.12_0.012_30)] shadow-glow-gold">
+            <button type="button" onClick={() => void handleLogin()} className="inline-flex w-full items-center justify-center gap-2 rounded-full gradient-gold px-6 py-3.5 text-sm font-bold text-[oklch(0.12_0.012_30)] shadow-glow-gold">
               Entrar no painel <Lock className="h-4 w-4" />
             </button>
           </form>
