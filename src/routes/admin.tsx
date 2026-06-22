@@ -4,6 +4,7 @@ import { ArrowLeft, Camera, Check, Download, Eye, Image, Lock, LogOut, Plus, Rot
 import { CMS_STORAGE_KEY, defaultCmsContent, loadCmsContent, resetCmsContent, saveCmsContent, type CmsContent } from "@/lib/cmsContent";
 
 export const Route = createFileRoute("/admin")({
+  ssr: false,
   head: () => ({
     meta: [
       { title: "Admin MAXIMUS — Atualização do site" },
