@@ -220,4 +220,20 @@
     50% { transform: translateY(-12px); }
   }
   .float-y { animation: float-y 6s ease-in-out infinite; }
+  .admin-input {
+    width: 100%;
+    border-radius: 1rem;
+    border: 1px solid oklch(0.78 0.13 82 / 0.2);
+    background: oklch(0.12 0.012 30 / 0.55);
+    padding: 0.85rem 1rem;
+    color: var(--foreground);
+    outline: none;
+    transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  }
+  .admin-input:focus {
+    border-color: oklch(0.78 0.13 82 / 0.7);
+    box-shadow: 0 0 0 3px oklch(0.78 0.13 82 / 0.12);
+    background: oklch(0.1 0.012 30 / 0.78);
+  }
+  .admin-input::placeholder { color: var(--muted-foreground); }
 }
