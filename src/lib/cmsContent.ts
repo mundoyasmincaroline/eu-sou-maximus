@@ -169,20 +169,38 @@ function mergeContent<T>(base: T, patch: unknown): T {
   return next as T;
 }
 
-export function loadCmsContent(): CmsContent {
+import { supabase } from "./supabase";
+
+export async function loadCmsContent(): Promise<CmsContent> {
   if (typeof window === "undefined") return defaultCmsContent;
   try {
-    const stored = window.localStorage.getItem(CMS_STORAGE_KEY);
-    return stored ? mergeContent(defaultCmsContent, JSON.parse(stored)) : defaultCmsContent;
-  } catch {
+    const { data, error } = await supabase.from("site_settings").select("content").eq("id", 1).single();
+    if (error || !data || !data.content) {
+      console.warn("CMS Content not found in Supabase or error. Falling back to default.", error);
+      return defaultCmsContent;
+    }
+    return mergeContent(defaultCmsContent, data.content);
+  } catch (err) {
+    console.error("Failed to load CMS from Supabase", err);
     return defaultCmsContent;
   }
 }
 
-export function saveCmsContent(content: CmsContent) {
+export async function saveCmsContent(content: CmsContent) {
   if (typeof window === "undefined") return;
-  window.localStorage.setItem(CMS_STORAGE_KEY, JSON.stringify({ ...content, updatedAt: new Date().toISOString() }));
-  window.dispatchEvent(new Event("maximus-cms-updated"));
+  const contentWithDate = { ...content, updatedAt: new Date().toISOString() };
+  
+  try {
+    const { error } = await supabase.from("site_settings").upsert({ id: 1, content: contentWithDate });
+    if (error) throw error;
+    
+    // Fallback local pra não quebrar outras abas na mesma sessão imediatamente
+    window.localStorage.setItem(CMS_STORAGE_KEY, JSON.stringify(contentWithDate));
+    window.dispatchEvent(new Event("maximus-cms-updated"));
+  } catch (err) {
+    console.error("Failed to save CMS to Supabase", err);
+    alert("Erro ao salvar no banco de dados. Verifique a conexão.");
+  }
 }
 
 export function resetCmsContent() {
@@ -193,15 +211,44 @@ export function resetCmsContent() {
 
 export function useCmsContent() {
   const [content, setContent] = useState<CmsContent>(defaultCmsContent);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const sync = () => setContent(loadCmsContent());
-    sync();
-    window.addEventListener("storage", sync);
-    window.addEventListener("maximus-cms-updated", sync);
+    let mounted = true;
+    
+    const fetchContent = async () => {
+      setIsLoading(true);
+      const data = await loadCmsContent();
+      if (mounted) {
+        setContent(data);
+        setIsLoading(false);
+      }
+    };
+    
+    fetchContent();
+
+    const syncLocal = () => {
+      const stored = window.localStorage.getItem(CMS_STORAGE_KEY);
+      if (stored) {
+        setContent(mergeContent(defaultCmsContent, JSON.parse(stored)));
+      }
+    };
+
+    window.addEventListener("maximus-cms-updated", syncLocal);
+    
+    // Escuta em tempo real as mudanças no Supabase
+    const channel = supabase.channel('schema-db-changes')
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'site_settings' }, (payload) => {
+        if (payload.new && payload.new.content) {
+          setContent(mergeContent(defaultCmsContent, payload.new.content));
+        }
+      })
+      .subscribe();
+
     return () => {
-      window.removeEventListener("storage", sync);
-      window.removeEventListener("maximus-cms-updated", sync);
+      mounted = false;
+      window.removeEventListener("maximus-cms-updated", syncLocal);
+      supabase.removeChannel(channel);
     };
   }, []);
 

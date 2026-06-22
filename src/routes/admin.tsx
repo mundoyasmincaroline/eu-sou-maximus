@@ -124,7 +124,7 @@ function AdminEditor({ onLogout }: { onLogout: () => void }) {
             ))}
           </div>
           <div className="mt-4 rounded-2xl border border-gold/15 bg-card/40 p-4 text-xs leading-relaxed text-muted-foreground">
-            <strong className="text-gold">Gratuito:</strong> este painel salva no navegador. Use “Backup” para exportar/importar conteúdo quando trocar de máquina.
+            <strong className="text-gold">Online:</strong> As alterações são salvas automaticamente no banco de dados e refletidas em tempo real.
           </div>
         </aside>
 
