@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState, type ChangeEvent } from "react";
+import { useMemo, useState, type ChangeEvent, type Dispatch, type FormEvent, type ReactNode, type SetStateAction } from "react";
 import { ArrowLeft, Camera, Check, Download, Eye, Image, Lock, LogOut, Plus, RotateCcw, Save, Trash2, Upload } from "lucide-react";
 import { CMS_STORAGE_KEY, defaultCmsContent, loadCmsContent, resetCmsContent, saveCmsContent, type CmsContent } from "@/lib/cmsContent";
 
@@ -30,7 +30,7 @@ function AdminPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  async function handleLogin(event: React.FormEvent) {
+  async function handleLogin(event: FormEvent) {
     event.preventDefault();
     setError("");
     const passwordHash = await sha256(password);
@@ -142,7 +142,7 @@ function AdminEditor({ onLogout }: { onLogout: () => void }) {
   );
 }
 
-type PanelProps = { content: CmsContent; setContent: React.Dispatch<React.SetStateAction<CmsContent>> };
+type PanelProps = { content: CmsContent; setContent: Dispatch<SetStateAction<CmsContent>> };
 
 function HomePanel({ content, setContent }: PanelProps) {
   return (
@@ -327,15 +327,15 @@ function BackupPanel({ content, setContent, onReset, onSave }: PanelProps & { on
   );
 }
 
-function Panel({ title, description, children }: { title: string; description: string; children: React.ReactNode }) {
+function Panel({ title, description, children }: { title: string; description: string; children: ReactNode }) {
   return <section className="space-y-6 rounded-3xl border border-gold/15 bg-card/50 p-6 shadow-luxe backdrop-blur md:p-8"><div><h2 className="font-display text-3xl font-bold">{title}</h2><p className="mt-2 text-sm text-muted-foreground">{description}</p></div>{children}</section>;
 }
 
-function Grid({ children }: { children: React.ReactNode }) {
+function Grid({ children }: { children: ReactNode }) {
   return <div className="grid gap-4 md:grid-cols-2">{children}</div>;
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({ label, children }: { label: string; children: ReactNode }) {
   return <label className="block"><span className="mb-2 block text-[11px] uppercase tracking-[0.24em] text-muted-foreground">{label}</span>{children}</label>;
 }
 
@@ -394,11 +394,11 @@ function ImageInput({ label, value, onChange, compact = false }: { label: string
   );
 }
 
-function Repeater({ title, children, onAdd }: { title: string; children: React.ReactNode; onAdd: () => void }) {
+function Repeater({ title, children, onAdd }: { title: string; children: ReactNode; onAdd: () => void }) {
   return <div className="space-y-4"><div className="flex items-center justify-between gap-4"><h3 className="font-display text-2xl font-bold">{title}</h3><button onClick={onAdd} className="inline-flex items-center gap-2 rounded-full border border-gold/30 px-4 py-2 text-sm font-semibold hover:bg-gold/10"><Plus className="h-4 w-4 text-gold" /> Adicionar</button></div>{children}</div>;
 }
 
-function RowCard({ children, onRemove }: { children: React.ReactNode; onRemove: () => void }) {
+function RowCard({ children, onRemove }: { children: ReactNode; onRemove: () => void }) {
   return <div className="relative space-y-4 rounded-2xl border border-gold/15 bg-background/30 p-4"><button onClick={onRemove} className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full border border-crimson/30 text-crimson hover:bg-crimson/10" aria-label="Remover"><Trash2 className="h-4 w-4" /></button><div className="pr-12">{children}</div></div>;
 }
 
