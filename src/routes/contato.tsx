@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ArrowRight, ArrowLeft, Check, MessageCircle, Sparkles, Handshake, Mic, Calendar, GraduationCap } from "lucide-react";
 import { WHATSAPP_URL } from "@/lib/site";
+import { useCmsContent } from "@/lib/cmsContent";
 
 export const Route = createFileRoute("/contato")({
   head: () => ({
@@ -25,6 +26,7 @@ const GOALS: { id: Goal; icon: typeof Handshake; title: string; desc: string }[]
 ];
 
 function Contato() {
+  const cms = useCmsContent();
   const [step, setStep] = useState(0);
   const [goal, setGoal] = useState<Goal | null>(null);
   const [name, setName] = useState("");
@@ -67,10 +69,10 @@ function Contato() {
             <Sparkles className="h-3 w-3" /> Contato profissional
           </div>
           <h1 className="mt-6 font-display text-5xl font-black leading-[1.02] md:text-6xl">
-            Vamos <span className="italic text-gradient-gold">conversar.</span>
+            {cms.contact.title.split(" ").slice(0, 1).join(" ")} <span className="italic text-gradient-gold">{cms.contact.title.split(" ").slice(1).join(" ")}</span>
           </h1>
           <p className="mt-5 text-muted-foreground">
-            Em 4 passos rápidos a sua mensagem chega direto no WhatsApp da equipe MAXIMUS.
+            {cms.contact.description}
           </p>
         </div>
 
