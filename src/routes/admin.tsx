@@ -163,9 +163,9 @@ type PanelProps = { content: CmsContent; setContent: Dispatch<SetStateAction<Cms
 
 function HomePanel({ content, setContent }: PanelProps) {
   return (
-    <Panel title="Home / Branding principal" description="Atualize a primeira impressão do site: headline, promessa, números e imagens principais.">
+    <Panel title="Home / Branding principal & Biografia" description="Atualize a primeira impressão do site e a biografia (Quem Sou Eu).">
       <ImageInput label="Imagem hero principal" value={content.home.heroBackgroundImage} onChange={(image) => setContent((c) => ({ ...c, home: { ...c.home, heroBackgroundImage: image } }))} />
-      <ImageInput label="Imagem vertical em destaque" value={content.home.heroPortraitImage} onChange={(image) => setContent((c) => ({ ...c, home: { ...c.home, heroPortraitImage: image } }))} />
+      <ImageInput label="Imagem vertical biografia (Quem Sou Eu)" value={content.home.heroPortraitImage} onChange={(image) => setContent((c) => ({ ...c, home: { ...c.home, heroPortraitImage: image } }))} />
       <Grid>
         <TextInput label="ID do YouTube para o Fundo (ex: BshWPt2MYxI)" value={content.home.heroYoutubeId || ""} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, heroYoutubeId: v } }))} />
         <div className="grid grid-cols-2 gap-4">
@@ -177,9 +177,9 @@ function HomePanel({ content, setContent }: PanelProps) {
         <TextInput label="Eyebrow" value={content.home.heroEyebrow} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, heroEyebrow: v } }))} />
         <TextInput label="Título" value={content.home.heroTitle} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, heroTitle: v } }))} />
         <TextInput label="Subtítulo" value={content.home.heroSubtitle} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, heroSubtitle: v } }))} />
-        <TextArea label="Descrição hero" value={content.home.heroDescription} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, heroDescription: v } }))} />
+        <TextArea label="Biografia / Texto Longo (Quem Sou Eu)" value={content.home.heroDescription} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, heroDescription: v } }))} />
       </Grid>
-      <Repeater title="Números de autoridade" onAdd={() => setContent((c) => ({ ...c, home: { ...c.home, stats: [...c.home.stats, { value: "0+", label: "Novo dado" }] } }))}>
+      <Repeater title="Números de autoridade (Quem Sou Eu)" onAdd={() => setContent((c) => ({ ...c, home: { ...c.home, stats: [...c.home.stats, { value: "0+", label: "Novo dado" }] } }))}>
         {content.home.stats.map((stat, index) => (
           <RowCard key={index} onRemove={() => setContent((c) => ({ ...c, home: { ...c.home, stats: c.home.stats.filter((_, i) => i !== index) } }))}>
             <TextInput label="Valor" value={stat.value} onChange={(v) => setContent((c) => updateStat(c, index, "value", v))} />

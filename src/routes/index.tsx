@@ -25,6 +25,7 @@ function Home() {
     <div className="overflow-hidden">
       <Hero content={cms.home} />
       <Marquee />
+      <AboutSection content={cms.home} />
       <Pillars />
       <ProgramTeaser content={cms} />
       <EventsTeaser content={cms.home} />
@@ -36,9 +37,8 @@ function Home() {
 }
 
 function Hero({ content }: { content: ReturnType<typeof useCmsContent>["home"] }) {
-  const [quote, ...rest] = content.heroDescription.split("\n");
   return (
-    <section className="relative isolate min-h-[92vh] overflow-hidden bg-background">
+    <section className="relative isolate min-h-[92vh] flex flex-col justify-center overflow-hidden bg-background">
       <img src={content.heroBackgroundImage} alt="" width={1920} height={1080} className="absolute inset-0 -z-20 h-full w-full object-cover opacity-70" />
       
       {content.heroYoutubeId && (
@@ -55,60 +55,73 @@ function Hero({ content }: { content: ReturnType<typeof useCmsContent>["home"] }
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/40 via-background/70 to-background" />
       <div className="absolute inset-0 -z-10 noise" />
 
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-24 lg:grid-cols-12 lg:px-10 lg:py-32">
-        <div className="lg:col-span-7">
-          <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-background/40 px-4 py-1.5 text-[11px] uppercase tracking-[0.32em] text-gold backdrop-blur">
-            <Sparkles className="h-3 w-3" /> {content.heroEyebrow}
-          </div>
-          <h1 className="mt-6 font-display text-[clamp(3rem,9vw,7.5rem)] font-black leading-[0.92] tracking-tight">
-            <span className="block text-gradient-gold">{content.heroTitle}</span>
-            <span className="mt-2 block text-2xl font-normal italic text-muted-foreground md:text-3xl">{content.heroSubtitle}</span>
-          </h1>
-          <p className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            <span className="text-gold">{quote}</span><br />
+      <div className="mx-auto w-full max-w-4xl text-center px-5 py-24 lg:px-10 lg:py-32">
+        <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-background/40 px-4 py-1.5 text-[11px] uppercase tracking-[0.32em] text-gold backdrop-blur">
+          <Sparkles className="h-3 w-3" /> {content.heroEyebrow}
+        </div>
+        <h1 className="mt-8 font-display text-[clamp(4rem,10vw,8.5rem)] font-black leading-[0.9] tracking-tight">
+          <span className="block text-gradient-gold">{content.heroTitle}</span>
+          <span className="mt-4 block text-3xl font-normal italic text-muted-foreground md:text-4xl">{content.heroSubtitle}</span>
+        </h1>
+        <div className="mt-14 flex flex-wrap justify-center items-center gap-4">
+          <Link
+            to="/contato"
+            className="group inline-flex items-center gap-2 rounded-full gradient-gold px-8 py-4.5 text-sm font-semibold text-[oklch(0.12_0.012_30)] shadow-glow-gold transition-transform hover:scale-[1.03]"
+          >
+            Fechar parceria
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-background/40 px-8 py-4.5 text-sm font-semibold text-foreground backdrop-blur transition-colors hover:bg-gold/10"
+          >
+            <MessageCircle className="h-4 w-4 text-gold" />
+            WhatsApp direto
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function AboutSection({ content }: { content: ReturnType<typeof useCmsContent>["home"] }) {
+  const [quote, ...rest] = content.heroDescription.split("\n");
+  
+  return (
+    <section className="mx-auto max-w-7xl px-5 py-24 lg:px-10 lg:py-32">
+      <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
+        <div>
+          <SectionHeader
+            eyebrow="Apresentador · Host · Influenciador"
+            title={<>Prazer, <span className="text-gradient-gold italic">MAXIMUS.</span></>}
+          />
+          <p className="mt-8 text-lg leading-relaxed text-muted-foreground">
+            <span className="text-gold">"{quote}"</span><br /><br />
             {rest.join(" ")}
           </p>
-          <div className="mt-10 flex flex-wrap items-center gap-4">
-            <Link
-              to="/contato"
-              className="group inline-flex items-center gap-2 rounded-full gradient-gold px-7 py-4 text-sm font-semibold text-[oklch(0.12_0.012_30)] shadow-glow-gold transition-transform hover:scale-[1.03]"
-            >
-              Fechar parceria
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-background/40 px-7 py-4 text-sm font-semibold text-foreground backdrop-blur transition-colors hover:bg-gold/10"
-            >
-              <MessageCircle className="h-4 w-4 text-gold" />
-              WhatsApp direto
-            </a>
-          </div>
-          <div className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-gold/15 pt-8">
-            {[
-              ...content.stats,
-            ].slice(0, 3).map((s) => (
+          
+          <div className="mt-12 grid grid-cols-3 gap-6 border-t border-gold/15 pt-8">
+            {[...content.stats].slice(0, 3).map((s) => (
               <div key={s.label}>
-                <div className="font-display text-3xl font-bold text-gradient-gold">{s.value}</div>
-                <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-muted-foreground">{s.label}</div>
+                <div className="font-display text-3xl font-bold text-gradient-gold sm:text-4xl">{s.value}</div>
+                <div className="mt-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground sm:text-xs">{s.label}</div>
               </div>
             ))}
           </div>
         </div>
-
-        <div className="relative lg:col-span-5">
-          <div className="float-y relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-3xl shadow-luxe ring-1 ring-gold/30">
-            <img src={content.heroPortraitImage} alt="MAXIMUS no estúdio" width={1600} height={1200} className="h-full w-full object-cover" />
+        
+        <div className="relative mx-auto w-full max-w-md lg:mr-0">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl shadow-luxe ring-1 ring-gold/30">
+            <img src={content.heroPortraitImage} alt="MAXIMUS" className="h-full w-full object-cover" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-6">
-              <div className="text-[10px] uppercase tracking-[0.4em] text-gold">No Ar</div>
-              <div className="mt-1 font-display text-2xl font-bold">Me Chama Que Eu Vou</div>
-              <div className="text-xs text-muted-foreground">Programa oficial de Maximus</div>
+              <div className="text-[10px] uppercase tracking-[0.4em] text-gold">Apresentador e Mentor</div>
+              <div className="mt-1 font-display text-2xl font-bold">Karlos Edward</div>
             </div>
           </div>
-          <div className="absolute -right-4 -top-4 hidden h-24 w-24 rounded-full gradient-gold opacity-60 blur-2xl lg:block" />
+          <div className="absolute -left-4 -top-4 -z-10 hidden h-32 w-32 rounded-full gradient-gold opacity-40 blur-3xl lg:block" />
         </div>
       </div>
     </section>
