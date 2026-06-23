@@ -43,7 +43,7 @@ function Home() {
 
 function Hero({ content, isLoading }: { content: ReturnType<typeof useCmsContentState>["content"]["home"]; isLoading: boolean }) {
   return (
-    <section className="relative isolate min-h-[92vh] flex flex-col justify-center overflow-hidden bg-background">
+    <section className="relative isolate min-h-[92vh] flex flex-col justify-start pt-28 md:justify-center md:pt-0 overflow-hidden bg-background">
       {!isLoading && <img src={content.heroBackgroundImage} alt="" width={1920} height={1080} className="absolute inset-0 -z-30 h-full w-full object-cover object-center opacity-100" />}
 
       {content.heroYoutubeId && !isLoading && (
@@ -61,18 +61,18 @@ function Hero({ content, isLoading }: { content: ReturnType<typeof useCmsContent
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/40 via-background/70 to-background" />
       <div className="absolute inset-0 -z-10 noise" />
 
-      <div className="mx-auto w-full max-w-4xl text-center px-5 py-24 lg:px-10 lg:py-32">
-        <div className="inline-flex items-center gap-2 rounded-full border border-crimson/30 bg-background/40 px-4 py-1.5 text-[11px] uppercase tracking-[0.32em] text-crimson backdrop-blur">
+      <div className="mx-auto w-full max-w-4xl text-center px-5 py-8 md:py-32">
+        <div className="inline-flex items-center gap-2 rounded-full border border-crimson/30 bg-background/40 px-4 py-1.5 text-[10px] md:text-[11px] uppercase tracking-[0.32em] text-crimson backdrop-blur">
           <Sparkles className="h-3 w-3" /> {content.heroEyebrow}
         </div>
-        <h1 className="mt-8 font-display text-[clamp(4rem,10vw,8.5rem)] font-black leading-[0.9] tracking-tight">
+        <h1 className="mt-6 md:mt-8 font-display text-[clamp(4rem,12vw,8.5rem)] font-black leading-[0.9] tracking-tight">
           <span className="block text-gradient-crimson">{content.heroTitle}</span>
-          <span className="mt-4 block text-3xl font-normal italic text-muted-foreground md:text-4xl">{content.heroSubtitle}</span>
+          <span className="mt-2 md:mt-4 block text-2xl md:text-4xl font-normal italic text-muted-foreground">{content.heroSubtitle}</span>
         </h1>
-        <div className="mt-14 flex flex-wrap justify-center items-center gap-4">
+        <div className="mt-8 md:mt-14 flex flex-col md:flex-row flex-wrap justify-center items-center gap-4">
           <Link
             to="/contato"
-            className="group inline-flex items-center gap-2 rounded-full gradient-crimson px-8 py-4.5 text-sm font-semibold text-[oklch(0.12_0.012_30)] shadow-glow-crimson transition-transform hover:scale-[1.03]"
+            className="group inline-flex items-center justify-center w-full md:w-auto gap-2 rounded-full gradient-crimson px-8 py-4 text-sm font-semibold text-[oklch(0.12_0.012_30)] shadow-glow-crimson transition-transform hover:scale-[1.03]"
           >
             Fechar parceria
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -81,7 +81,7 @@ function Hero({ content, isLoading }: { content: ReturnType<typeof useCmsContent
             href={WHATSAPP_URL}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-crimson/40 bg-background/40 px-8 py-4.5 text-sm font-semibold text-foreground backdrop-blur transition-colors hover:bg-crimson/10"
+            className="inline-flex items-center justify-center w-full md:w-auto gap-2 rounded-full border border-crimson/40 bg-background/40 px-8 py-4 text-sm font-semibold text-foreground backdrop-blur transition-colors hover:bg-crimson/10"
           >
             <MessageCircle className="h-4 w-4 text-crimson" />
             WhatsApp direto
