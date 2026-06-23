@@ -47,9 +47,9 @@ function AdminPage() {
   if (!authenticated) {
     return (
       <section className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-6xl items-center px-5 py-16 lg:px-10">
-        <div className="mx-auto w-full max-w-md overflow-hidden rounded-3xl border border-gold/20 bg-card/70 p-7 shadow-luxe backdrop-blur md:p-9">
-          <div className="grid h-14 w-14 place-items-center rounded-full gradient-gold text-[oklch(0.12_0.012_30)] shadow-glow-gold"><Lock className="h-6 w-6" /></div>
-          <h1 className="mt-6 font-display text-4xl font-black leading-tight">Admin <span className="text-gradient-gold italic">MAXIMUS</span></h1>
+        <div className="mx-auto w-full max-w-md overflow-hidden rounded-3xl border border-crimson/20 bg-card/70 p-7 shadow-luxe backdrop-blur md:p-9">
+          <div className="grid h-14 w-14 place-items-center rounded-full gradient-crimson text-[oklch(0.12_0.012_30)] shadow-glow-crimson"><Lock className="h-6 w-6" /></div>
+          <h1 className="mt-6 font-display text-4xl font-black leading-tight">Admin <span className="text-gradient-crimson italic">MAXIMUS</span></h1>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Acesse para atualizar fotos, textos, episódios, eventos, galeria, mentorias e depoimentos.</p>
           <form onSubmit={handleLogin} className="mt-8 space-y-4">
             <Field label="Email">
@@ -59,7 +59,7 @@ function AdminPage() {
               <input value={password} onChange={(e) => setPassword(e.target.value)} className="admin-input" type="password" autoComplete="current-password" />
             </Field>
             {error && <p className="rounded-xl border border-crimson/40 bg-crimson/10 px-4 py-3 text-sm text-foreground">{error}</p>}
-            <button type="button" onClick={() => void handleLogin()} className="inline-flex w-full items-center justify-center gap-2 rounded-full gradient-gold px-6 py-3.5 text-sm font-bold text-[oklch(0.12_0.012_30)] shadow-glow-gold">
+            <button type="button" onClick={() => void handleLogin()} className="inline-flex w-full items-center justify-center gap-2 rounded-full gradient-crimson px-6 py-3.5 text-sm font-bold text-[oklch(0.12_0.012_30)] shadow-glow-crimson">
               Entrar no painel <Lock className="h-4 w-4" />
             </button>
           </form>
@@ -110,42 +110,42 @@ function AdminEditor({ onLogout }: { onLogout: () => void }) {
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background">
-        <div className="text-sm font-semibold uppercase tracking-[0.3em] text-gold animate-pulse">Carregando painel...</div>
+        <div className="text-sm font-semibold uppercase tracking-[0.3em] text-crimson animate-pulse">Carregando painel...</div>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-background">
-      <section className="border-b border-gold/15 bg-[oklch(0.09_0.012_30)]">
+      <section className="border-b border-crimson/15 bg-[oklch(0.09_0.012_30)]">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-10 lg:flex-row lg:items-end lg:justify-between lg:px-10">
           <div>
-            <Link to="/" className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.28em] text-muted-foreground hover:text-gold"><ArrowLeft className="h-4 w-4" /> Voltar ao site</Link>
-            <h1 className="mt-5 font-display text-5xl font-black leading-tight md:text-6xl">Painel <span className="text-gradient-gold italic">editorial.</span></h1>
+            <Link to="/" className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.28em] text-muted-foreground hover:text-crimson"><ArrowLeft className="h-4 w-4" /> Voltar ao site</Link>
+            <h1 className="mt-5 font-display text-5xl font-black leading-tight md:text-6xl">Painel <span className="text-gradient-crimson italic">editorial.</span></h1>
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">Atualize todo o conteúdo visual e textual. Fotos são otimizadas automaticamente para carregar rápido mantendo aparência premium.</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link to="/" className="inline-flex items-center gap-2 rounded-full border border-gold/30 px-5 py-3 text-sm font-semibold hover:bg-gold/10"><Eye className="h-4 w-4 text-gold" /> Ver site</Link>
-            <button onClick={() => persist()} className="inline-flex items-center gap-2 rounded-full gradient-gold px-5 py-3 text-sm font-bold text-[oklch(0.12_0.012_30)] shadow-glow-gold"><Save className="h-4 w-4" /> Salvar</button>
-            <button onClick={onLogout} className="inline-flex items-center gap-2 rounded-full border border-gold/30 px-5 py-3 text-sm font-semibold hover:bg-gold/10"><LogOut className="h-4 w-4 text-gold" /> Sair</button>
+            <Link to="/" className="inline-flex items-center gap-2 rounded-full border border-crimson/30 px-5 py-3 text-sm font-semibold hover:bg-crimson/10"><Eye className="h-4 w-4 text-crimson" /> Ver site</Link>
+            <button onClick={() => persist()} className="inline-flex items-center gap-2 rounded-full gradient-crimson px-5 py-3 text-sm font-bold text-[oklch(0.12_0.012_30)] shadow-glow-crimson"><Save className="h-4 w-4" /> Salvar</button>
+            <button onClick={onLogout} className="inline-flex items-center gap-2 rounded-full border border-crimson/30 px-5 py-3 text-sm font-semibold hover:bg-crimson/10"><LogOut className="h-4 w-4 text-crimson" /> Sair</button>
           </div>
         </div>
       </section>
 
       <div className="mx-auto grid max-w-7xl gap-8 px-5 py-8 lg:grid-cols-[260px_1fr] lg:px-10">
         <aside className="lg:sticky lg:top-24 lg:self-start">
-          <div className="rounded-2xl border border-gold/15 bg-card/60 p-3 backdrop-blur">
+          <div className="rounded-2xl border border-crimson/15 bg-card/60 p-3 backdrop-blur">
             {tabs.map((tab) => (
-              <button key={tab.id} onClick={() => setActive(tab.id)} className={`block w-full rounded-xl px-4 py-3 text-left text-sm font-semibold transition-colors ${active === tab.id ? "gradient-gold text-[oklch(0.12_0.012_30)]" : "text-muted-foreground hover:bg-gold/10 hover:text-foreground"}`}>{tab.label}</button>
+              <button key={tab.id} onClick={() => setActive(tab.id)} className={`block w-full rounded-xl px-4 py-3 text-left text-sm font-semibold transition-colors ${active === tab.id ? "gradient-crimson text-[oklch(0.12_0.012_30)]" : "text-muted-foreground hover:bg-crimson/10 hover:text-foreground"}`}>{tab.label}</button>
             ))}
           </div>
-          <div className="mt-4 rounded-2xl border border-gold/15 bg-card/40 p-4 text-xs leading-relaxed text-muted-foreground">
-            <strong className="text-gold">Online:</strong> As alterações são salvas automaticamente no banco de dados e refletidas em tempo real.
+          <div className="mt-4 rounded-2xl border border-crimson/15 bg-card/40 p-4 text-xs leading-relaxed text-muted-foreground">
+            <strong className="text-crimson">Online:</strong> As alterações são salvas automaticamente no banco de dados e refletidas em tempo real.
           </div>
         </aside>
 
         <main className="space-y-6">
-          {saved && <div className="flex items-center gap-2 rounded-2xl border border-gold/25 bg-gold/10 px-5 py-3 text-sm text-foreground"><Check className="h-4 w-4 text-gold" /> Alterações salvas.</div>}
+          {saved && <div className="flex items-center gap-2 rounded-2xl border border-crimson/25 bg-crimson/10 px-5 py-3 text-sm text-foreground"><Check className="h-4 w-4 text-crimson" /> Alterações salvas.</div>}
           {active === "home" && <HomePanel content={content} setContent={setContent} />}
           {active === "program" && <ProgramPanel content={content} setContent={setContent} />}
           {active === "events" && <EventsPanel content={content} setContent={setContent} />}
@@ -347,8 +347,8 @@ function BackupPanel({ content, setContent, onReset, onSave }: PanelProps & { on
   return (
     <Panel title="Backup gratuito" description="Exporte o conteúdo para guardar ou importar em outro navegador. Isso evita depender de serviços pagos.">
       <div className="flex flex-wrap gap-3">
-        <button onClick={download} className="inline-flex items-center gap-2 rounded-full gradient-gold px-5 py-3 text-sm font-bold text-[oklch(0.12_0.012_30)]"><Download className="h-4 w-4" /> Baixar backup</button>
-        <label className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-gold/30 px-5 py-3 text-sm font-semibold hover:bg-gold/10"><Upload className="h-4 w-4 text-gold" /> Importar backup<input type="file" accept="application/json" className="hidden" onChange={importJson} /></label>
+        <button onClick={download} className="inline-flex items-center gap-2 rounded-full gradient-crimson px-5 py-3 text-sm font-bold text-[oklch(0.12_0.012_30)]"><Download className="h-4 w-4" /> Baixar backup</button>
+        <label className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-crimson/30 px-5 py-3 text-sm font-semibold hover:bg-crimson/10"><Upload className="h-4 w-4 text-crimson" /> Importar backup<input type="file" accept="application/json" className="hidden" onChange={importJson} /></label>
         <button onClick={onReset} className="inline-flex items-center gap-2 rounded-full border border-crimson/40 px-5 py-3 text-sm font-semibold hover:bg-crimson/10"><RotateCcw className="h-4 w-4 text-crimson" /> Restaurar original</button>
       </div>
       <textarea value={json} readOnly rows={16} className="admin-input font-mono text-xs" />
@@ -358,7 +358,7 @@ function BackupPanel({ content, setContent, onReset, onSave }: PanelProps & { on
 }
 
 function Panel({ title, description, children }: { title: string; description: string; children: ReactNode }) {
-  return <section className="space-y-6 rounded-3xl border border-gold/15 bg-card/50 p-6 shadow-luxe backdrop-blur md:p-8"><div><h2 className="font-display text-3xl font-bold">{title}</h2><p className="mt-2 text-sm text-muted-foreground">{description}</p></div>{children}</section>;
+  return <section className="space-y-6 rounded-3xl border border-crimson/15 bg-card/50 p-6 shadow-luxe backdrop-blur md:p-8"><div><h2 className="font-display text-3xl font-bold">{title}</h2><p className="mt-2 text-sm text-muted-foreground">{description}</p></div>{children}</section>;
 }
 
 function Grid({ children }: { children: ReactNode }) {
@@ -412,11 +412,11 @@ function ImageInput({ label, value, onChange, compact = false }: { label: string
   return (
     <Field label={label}>
       <div className={`grid gap-4 ${compact ? "md:grid-cols-[140px_1fr]" : "md:grid-cols-[220px_1fr]"}`}>
-        <div className={`relative overflow-hidden rounded-2xl border border-gold/20 bg-background/40 ${compact ? "aspect-square" : "aspect-video"}`}>
-          {value ? <img src={value} alt={label} className="h-full w-full object-cover" /> : <div className="grid h-full place-items-center text-gold"><Image className="h-8 w-8" /></div>}
+        <div className={`relative overflow-hidden rounded-2xl border border-crimson/20 bg-background/40 ${compact ? "aspect-square" : "aspect-video"}`}>
+          {value ? <img src={value} alt={label} className="h-full w-full object-cover" /> : <div className="grid h-full place-items-center text-crimson"><Image className="h-8 w-8" /></div>}
         </div>
         <div className="space-y-3">
-          <label className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-gold/30 px-5 py-3 text-sm font-semibold hover:bg-gold/10"><Camera className="h-4 w-4 text-gold" /> {busy ? "Otimizando..." : "Subir foto"}<input type="file" accept="image/*" className="hidden" onChange={handleFile} /></label>
+          <label className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-crimson/30 px-5 py-3 text-sm font-semibold hover:bg-crimson/10"><Camera className="h-4 w-4 text-crimson" /> {busy ? "Otimizando..." : "Subir foto"}<input type="file" accept="image/*" className="hidden" onChange={handleFile} /></label>
           <input value={value.startsWith("data:") ? "Imagem enviada pelo painel" : value} onChange={(e) => onChange(e.target.value)} className="admin-input text-xs" placeholder="Ou cole uma URL de imagem" />
         </div>
       </div>
@@ -425,11 +425,11 @@ function ImageInput({ label, value, onChange, compact = false }: { label: string
 }
 
 function Repeater({ title, children, onAdd }: { title: string; children: ReactNode; onAdd: () => void }) {
-  return <div className="space-y-4"><div className="flex items-center justify-between gap-4"><h3 className="font-display text-2xl font-bold">{title}</h3><button onClick={onAdd} className="inline-flex items-center gap-2 rounded-full border border-gold/30 px-4 py-2 text-sm font-semibold hover:bg-gold/10"><Plus className="h-4 w-4 text-gold" /> Adicionar</button></div>{children}</div>;
+  return <div className="space-y-4"><div className="flex items-center justify-between gap-4"><h3 className="font-display text-2xl font-bold">{title}</h3><button onClick={onAdd} className="inline-flex items-center gap-2 rounded-full border border-crimson/30 px-4 py-2 text-sm font-semibold hover:bg-crimson/10"><Plus className="h-4 w-4 text-crimson" /> Adicionar</button></div>{children}</div>;
 }
 
 function RowCard({ children, onRemove }: { children: ReactNode; onRemove: () => void }) {
-  return <div className="relative space-y-4 rounded-2xl border border-gold/15 bg-background/30 p-4"><button onClick={onRemove} className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full border border-crimson/30 text-crimson hover:bg-crimson/10" aria-label="Remover"><Trash2 className="h-4 w-4" /></button><div className="pr-12">{children}</div></div>;
+  return <div className="relative space-y-4 rounded-2xl border border-crimson/15 bg-background/30 p-4"><button onClick={onRemove} className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full border border-crimson/30 text-crimson hover:bg-crimson/10" aria-label="Remover"><Trash2 className="h-4 w-4" /></button><div className="pr-12">{children}</div></div>;
 }
 
 function updateStat(content: CmsContent, index: number, key: "value" | "label", value: string): CmsContent {

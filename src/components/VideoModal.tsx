@@ -31,7 +31,7 @@ export function VideoModal({ isOpen, onClose, embedId, youtubeId }: VideoModalPr
         <X className="w-6 h-6" />
       </button>
       
-      <div className="relative w-full max-w-4xl aspect-video md:max-h-[85vh] bg-card rounded-2xl overflow-hidden shadow-2xl ring-1 ring-gold/30">
+      <div className="relative w-full max-w-4xl aspect-video md:max-h-[85vh] bg-card rounded-2xl overflow-hidden shadow-2xl ring-1 ring-crimson/30">
         {youtubeId ? (
           <iframe
             src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&modestbranding=1&rel=0`}

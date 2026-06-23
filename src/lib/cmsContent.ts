@@ -2,7 +2,7 @@ import heroStage from "@/assets/hero-stage.jpg";
 import eventCountry from "@/assets/event-country.jpg";
 import mentoria from "@/assets/mentoria.jpg";
 import programBg from "@/assets/program-bg.jpg";
-import textureGold from "@/assets/texture-gold.jpg";
+import texturecrimson from "@/assets/texture-crimson.jpg";
 import { INSTAGRAM_URL } from "@/lib/site";
 import { useEffect, useState } from "react";
 
@@ -140,7 +140,7 @@ export const defaultCmsContent: CmsContent = {
       { id: "gallery-2", image: mentoria, alt: "Post do Instagram 2", embedId: "DZ2G18aJQ2q", youtubeId: "", link: "https://www.instagram.com/eusoumaximus/reel/DZ2G18aJQ2q/" },
       { id: "gallery-3", image: eventCountry, alt: "Evento Maximus", embedId: "", youtubeId: "", link: INSTAGRAM_URL },
       { id: "gallery-4", image: programBg, alt: "Programa Maximus", embedId: "", youtubeId: "", link: INSTAGRAM_URL },
-      { id: "gallery-5", image: textureGold, alt: "Branding Maximus", embedId: "", youtubeId: "", link: INSTAGRAM_URL },
+      { id: "gallery-5", image: texturecrimson, alt: "Branding Maximus", embedId: "", youtubeId: "", link: INSTAGRAM_URL },
       { id: "gallery-6", image: heroStage, alt: "Palco Maximus", embedId: "", youtubeId: "", link: INSTAGRAM_URL },
       { id: "gallery-7", image: eventCountry, alt: "Experience Country", embedId: "", youtubeId: "", link: INSTAGRAM_URL },
       { id: "gallery-8", image: mentoria, alt: "Mentoria Maximus", embedId: "", youtubeId: "", link: INSTAGRAM_URL },
@@ -177,7 +177,7 @@ const assetAliases = [
   { match: /\/assets\/event-country-[\w-]+\.jpg$/, value: eventCountry },
   { match: /\/assets\/mentoria-[\w-]+\.jpg$/, value: mentoria },
   { match: /\/assets\/program-bg-[\w-]+\.jpg$/, value: programBg },
-  { match: /\/assets\/texture-gold-[\w-]+\.jpg$/, value: textureGold },
+  { match: /\/assets\/texture-crimson-[\w-]+\.jpg$/, value: texturecrimson },
 ];
 
 function normalizeAssetUrl(value: string) {

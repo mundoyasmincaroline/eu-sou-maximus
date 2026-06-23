@@ -25,7 +25,7 @@ export function Navbar() {
               key={n.to}
               to={n.to}
               activeOptions={{ exact: n.to === "/" }}
-              className="relative text-sm font-medium tracking-wide text-muted-foreground transition-colors hover:text-gold data-[status=active]:text-gold"
+              className="relative text-sm font-medium tracking-wide text-muted-foreground transition-colors hover:text-crimson data-[status=active]:text-crimson"
             >
               {n.label}
             </Link>
@@ -35,14 +35,14 @@ export function Navbar() {
           href={WHATSAPP_URL}
           target="_blank"
           rel="noreferrer"
-          className="hidden items-center gap-2 rounded-full gradient-gold px-5 py-2.5 text-sm font-semibold text-[oklch(0.12_0.012_30)] shadow-glow-gold transition-transform hover:scale-[1.03] lg:inline-flex"
+          className="hidden items-center gap-2 rounded-full gradient-crimson px-5 py-2.5 text-sm font-semibold text-[oklch(0.12_0.012_30)] shadow-glow-crimson transition-transform hover:scale-[1.03] lg:inline-flex"
         >
           <MessageCircle className="h-4 w-4" />
           Fale com a equipe
         </a>
         <button
           onClick={() => setOpen((v) => !v)}
-          className="rounded-full border border-[oklch(0.78_0.13_82/0.3)] p-2 text-gold lg:hidden"
+          className="rounded-full border border-[oklch(0.78_0.13_82/0.3)] p-2 text-crimson lg:hidden"
           aria-label="Menu"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -56,7 +56,7 @@ export function Navbar() {
                 key={n.to}
                 to={n.to}
                 onClick={() => setOpen(false)}
-                className="text-base font-medium text-muted-foreground hover:text-gold"
+                className="text-base font-medium text-muted-foreground hover:text-crimson"
               >
                 {n.label}
               </Link>
@@ -65,7 +65,7 @@ export function Navbar() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noreferrer"
-              className="mt-2 inline-flex items-center justify-center gap-2 rounded-full gradient-gold px-5 py-3 text-sm font-semibold text-[oklch(0.12_0.012_30)]"
+              className="mt-2 inline-flex items-center justify-center gap-2 rounded-full gradient-crimson px-5 py-3 text-sm font-semibold text-[oklch(0.12_0.012_30)]"
             >
               <MessageCircle className="h-4 w-4" />
               Fale com a equipe

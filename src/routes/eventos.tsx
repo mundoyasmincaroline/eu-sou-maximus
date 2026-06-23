@@ -23,9 +23,9 @@ function Eventos() {
         <img src={cms.events.heroImage} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-60" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/60 to-background" />
         <div className="mx-auto max-w-7xl px-5 lg:px-10">
-          <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 px-4 py-1.5 text-[11px] uppercase tracking-[0.32em] text-gold"><Sparkles className="h-3 w-3" /> Agenda</div>
+          <div className="inline-flex items-center gap-2 rounded-full border border-crimson/30 px-4 py-1.5 text-[11px] uppercase tracking-[0.32em] text-crimson"><Sparkles className="h-3 w-3" /> Agenda</div>
           <h1 className="mt-6 font-display text-[clamp(3rem,8vw,7rem)] font-black leading-[0.95]">
-            {cms.events.heroTitle.split(" ").slice(0, 1).join(" ")} <span className="italic text-gradient-gold">{cms.events.heroTitle.split(" ").slice(1).join(" ")}</span>
+            {cms.events.heroTitle.split(" ").slice(0, 1).join(" ")} <span className="italic text-gradient-crimson">{cms.events.heroTitle.split(" ").slice(1).join(" ")}</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
             {cms.events.heroDescription}
@@ -36,24 +36,24 @@ function Eventos() {
       <section className="mx-auto max-w-7xl px-5 py-12 lg:px-10 lg:py-20">
         <div className="space-y-8">
           {cms.events.items.map((e, i) => (
-            <article key={e.id} className="group relative grid overflow-hidden rounded-3xl border border-gold/15 bg-card/60 backdrop-blur md:grid-cols-2">
+            <article key={e.id} className="group relative grid overflow-hidden rounded-3xl border border-crimson/15 bg-card/60 backdrop-blur md:grid-cols-2">
               <div className={`relative aspect-[16/10] overflow-hidden md:aspect-auto ${i % 2 ? "md:order-2" : ""}`}>
                 <img src={e.image} alt={e.name} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-r from-background/50 to-transparent" />
-                <div className="absolute left-5 top-5 rounded-full bg-background/70 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-gold backdrop-blur">{e.tag}</div>
+                <div className="absolute left-5 top-5 rounded-full bg-background/70 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-crimson backdrop-blur">{e.tag}</div>
               </div>
               <div className="flex flex-col justify-center gap-5 p-8 md:p-12">
                 <h2 className="font-display text-3xl font-bold leading-tight md:text-4xl">{e.name}</h2>
                 <p className="text-muted-foreground">{e.description}</p>
                 <div className="space-y-2 text-sm">
-                  <div className="flex items-center gap-2"><Calendar className="h-4 w-4 text-gold" /> {e.date}</div>
-                  <div className="flex items-center gap-2"><MapPin className="h-4 w-4 text-gold" /> {e.time}</div>
+                  <div className="flex items-center gap-2"><Calendar className="h-4 w-4 text-crimson" /> {e.date}</div>
+                  <div className="flex items-center gap-2"><MapPin className="h-4 w-4 text-crimson" /> {e.time}</div>
                 </div>
                 <div className="flex flex-wrap gap-3 pt-2">
-                  <Link to="/contato" className="inline-flex items-center gap-2 rounded-full gradient-gold px-6 py-3 text-sm font-semibold text-[oklch(0.12_0.012_30)]">
+                  <Link to="/contato" className="inline-flex items-center gap-2 rounded-full gradient-crimson px-6 py-3 text-sm font-semibold text-[oklch(0.12_0.012_30)]">
                     Quero participar <ArrowRight className="h-4 w-4" />
                   </Link>
-                  <Link to="/contato" className="inline-flex items-center gap-2 rounded-full border border-gold/40 px-6 py-3 text-sm font-semibold hover:bg-gold/10">
+                  <Link to="/contato" className="inline-flex items-center gap-2 rounded-full border border-crimson/40 px-6 py-3 text-sm font-semibold hover:bg-crimson/10">
                     Patrocinar
                   </Link>
                 </div>
@@ -64,15 +64,15 @@ function Eventos() {
       </section>
 
       <section className="mx-auto max-w-7xl px-5 py-16 lg:px-10">
-        <SectionHeader eyebrow="O que vive em um evento MAXIMUS" align="center" title={<>Cada detalhe pensado para <span className="italic text-gradient-gold">marcar.</span></>} />
+        <SectionHeader eyebrow="O que vive em um evento MAXIMUS" align="center" title={<>Cada detalhe pensado para <span className="italic text-gradient-crimson">marcar.</span></>} />
         <div className="mt-14 grid gap-5 md:grid-cols-3">
           {[
             { icon: Music, t: "Música ao vivo", d: "Curadoria country-luxe que dita o tom da noite." },
             { icon: Users, t: "Networking real", d: "Encontros mediados entre marcas, criadores e decisores." },
             { icon: Sparkles, t: "Experiência premium", d: "Cenografia, iluminação e brincadeiras que viram conteúdo." },
           ].map((it) => (
-            <div key={it.t} className="rounded-2xl border border-gold/15 bg-card/60 p-7 backdrop-blur">
-              <it.icon className="h-7 w-7 text-gold" strokeWidth={1.5} />
+            <div key={it.t} className="rounded-2xl border border-crimson/15 bg-card/60 p-7 backdrop-blur">
+              <it.icon className="h-7 w-7 text-crimson" strokeWidth={1.5} />
               <h3 className="mt-5 font-display text-xl font-bold">{it.t}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{it.d}</p>
             </div>

@@ -25,20 +25,20 @@ function Galeria() {
   return (
     <div className="overflow-hidden">
       <section className="mx-auto max-w-7xl px-5 py-24 lg:px-10 lg:py-32">
-        <SectionHeader eyebrow="Galeria" title={<>{cms.gallery.title.split(" e ")[0]} e <span className="italic text-gradient-gold">{cms.gallery.title.split(" e ").slice(1).join(" e ") || "presença."}</span></>} description={cms.gallery.description} />
-        <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 rounded-full border border-gold/40 px-5 py-2.5 text-sm font-semibold hover:bg-gold/10">
-          <Instagram className="h-4 w-4 text-gold" /> @eusoumaximus
+        <SectionHeader eyebrow="Galeria" title={<>{cms.gallery.title.split(" e ")[0]} e <span className="italic text-gradient-crimson">{cms.gallery.title.split(" e ").slice(1).join(" e ") || "presença."}</span></>} description={cms.gallery.description} />
+        <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 rounded-full border border-crimson/40 px-5 py-2.5 text-sm font-semibold hover:bg-crimson/10">
+          <Instagram className="h-4 w-4 text-crimson" /> @eusoumaximus
         </a>
         <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
           {isLoading ? Array.from({ length: 8 }).map((_, i) => (
             <div
               key={i}
-              className={`relative overflow-hidden rounded-2xl bg-card/70 ring-1 ring-gold/15 ${i % 5 === 0 ? "row-span-2 aspect-[3/5]" : "aspect-[4/5]"}`}
+              className={`relative overflow-hidden rounded-2xl bg-card/70 ring-1 ring-crimson/15 ${i % 5 === 0 ? "row-span-2 aspect-[3/5]" : "aspect-[4/5]"}`}
             >
               <div className="absolute inset-0 shimmer opacity-40" />
             </div>
           )) : cms.gallery.items.map((post, i) => {
-            const className = `block group relative overflow-hidden cursor-pointer rounded-2xl ring-1 ring-gold/15 bg-card/60 ${i % 5 === 0 ? "row-span-2 aspect-[3/5]" : "aspect-[4/5]"}`;
+            const className = `block group relative overflow-hidden cursor-pointer rounded-2xl ring-1 ring-crimson/15 bg-card/60 ${i % 5 === 0 ? "row-span-2 aspect-[3/5]" : "aspect-[4/5]"}`;
             
             return (
               <div
@@ -60,7 +60,7 @@ function Galeria() {
                 </div>
                 {post.embedId && (
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-90 group-hover:opacity-100 transition-opacity">
-                    <span className="grid h-12 w-12 place-items-center rounded-full gradient-gold text-[oklch(0.12_0.012_30)] shadow-glow-gold">
+                    <span className="grid h-12 w-12 place-items-center rounded-full gradient-crimson text-[oklch(0.12_0.012_30)] shadow-glow-crimson">
                       <Play className="h-5 w-5 fill-current" />
                     </span>
                   </div>
