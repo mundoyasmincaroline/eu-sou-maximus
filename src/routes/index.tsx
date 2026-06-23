@@ -39,18 +39,19 @@ function Hero({ content }: { content: ReturnType<typeof useCmsContent>["home"] }
   const [quote, ...rest] = content.heroDescription.split("\n");
   return (
     <section className="relative isolate min-h-[92vh] overflow-hidden bg-background">
-      {content.heroYoutubeId ? (
-        <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden bg-black">
+      <img src={content.heroBackgroundImage} alt="" width={1920} height={1080} className="absolute inset-0 -z-20 h-full w-full object-cover opacity-70" />
+      
+      {content.heroYoutubeId && (
+        <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden mix-blend-screen">
           <iframe
             src={`https://www.youtube.com/embed/${content.heroYoutubeId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${content.heroYoutubeId}&playsinline=1&start=${content.heroYoutubeStartTime || 0}&end=${content.heroYoutubeEndTime || 15}`}
-            className="absolute top-1/2 left-1/2 w-[150vw] h-[150vh] -translate-x-1/2 -translate-y-1/2 object-cover opacity-50"
+            className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 opacity-70"
             allow="autoplay; encrypted-media"
             frameBorder="0"
           />
         </div>
-      ) : (
-        <img src={content.heroBackgroundImage} alt="" width={1920} height={1080} className="absolute inset-0 -z-10 h-full w-full object-cover opacity-70" />
       )}
+      
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/40 via-background/70 to-background" />
       <div className="absolute inset-0 -z-10 noise" />
 
