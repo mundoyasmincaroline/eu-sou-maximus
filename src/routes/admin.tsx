@@ -167,6 +167,13 @@ function HomePanel({ content, setContent }: PanelProps) {
       <ImageInput label="Imagem hero principal" value={content.home.heroBackgroundImage} onChange={(image) => setContent((c) => ({ ...c, home: { ...c.home, heroBackgroundImage: image } }))} />
       <ImageInput label="Imagem vertical em destaque" value={content.home.heroPortraitImage} onChange={(image) => setContent((c) => ({ ...c, home: { ...c.home, heroPortraitImage: image } }))} />
       <Grid>
+        <TextInput label="ID do YouTube para o Fundo (ex: BshWPt2MYxI)" value={content.home.heroYoutubeId || ""} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, heroYoutubeId: v } }))} />
+        <div className="grid grid-cols-2 gap-4">
+          <TextInput label="Tempo Início (segundos)" value={content.home.heroYoutubeStartTime || "0"} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, heroYoutubeStartTime: v } }))} />
+          <TextInput label="Tempo Fim (segundos)" value={content.home.heroYoutubeEndTime || "15"} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, heroYoutubeEndTime: v } }))} />
+        </div>
+      </Grid>
+      <Grid>
         <TextInput label="Eyebrow" value={content.home.heroEyebrow} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, heroEyebrow: v } }))} />
         <TextInput label="Título" value={content.home.heroTitle} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, heroTitle: v } }))} />
         <TextInput label="Subtítulo" value={content.home.heroSubtitle} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, heroSubtitle: v } }))} />
@@ -198,7 +205,7 @@ function ProgramPanel({ content, setContent }: PanelProps) {
       <ImageInput label="Imagem de capa" value={content.program.heroImage} onChange={(image) => setContent((c) => ({ ...c, program: { ...c.program, heroImage: image } }))} />
       <TextInput label="Título" value={content.program.heroTitle} onChange={(v) => setContent((c) => ({ ...c, program: { ...c.program, heroTitle: v } }))} />
       <TextArea label="Descrição" value={content.program.heroDescription} onChange={(v) => setContent((c) => ({ ...c, program: { ...c.program, heroDescription: v } }))} />
-      <Repeater title="Episódios" onAdd={() => setContent((c) => ({ ...c, program: { ...c.program, episodes: [...c.program.episodes, { id: crypto.randomUUID(), number: String(c.program.episodes.length + 1).padStart(2, "0"), title: "Novo episódio", guest: "Convidado", duration: "Instagram", image: c.program.heroImage, embedId: "", link: "https://www.instagram.com/eusoumaximus/" }] } }))}>
+      <Repeater title="Episódios" onAdd={() => setContent((c) => ({ ...c, program: { ...c.program, episodes: [...c.program.episodes, { id: crypto.randomUUID(), number: String(c.program.episodes.length + 1).padStart(2, "0"), title: "Novo episódio", guest: "Convidado", duration: "Instagram", image: c.program.heroImage, embedId: "", youtubeId: "", link: "https://www.instagram.com/eusoumaximus/" }] } }))}>
         {content.program.episodes.map((episode, index) => (
           <RowCard key={episode.id} onRemove={() => setContent((c) => ({ ...c, program: { ...c.program, episodes: c.program.episodes.filter((_, i) => i !== index) } }))}>
             <ImageInput label="Capa" value={episode.image} onChange={(v) => setContent((c) => updateEpisode(c, index, "image", v))} compact />
@@ -207,7 +214,8 @@ function ProgramPanel({ content, setContent }: PanelProps) {
               <TextInput label="Título" value={episode.title} onChange={(v) => setContent((c) => updateEpisode(c, index, "title", v))} />
               <TextInput label="Convidado/local" value={episode.guest} onChange={(v) => setContent((c) => updateEpisode(c, index, "guest", v))} />
               <TextInput label="Duração/tag" value={episode.duration} onChange={(v) => setContent((c) => updateEpisode(c, index, "duration", v))} />
-              <TextInput label="Embed ID Instagram" value={episode.embedId} onChange={(v) => setContent((c) => updateEpisode(c, index, "embedId", v))} />
+              <TextInput label="Embed ID Instagram" value={episode.embedId || ""} onChange={(v) => setContent((c) => updateEpisode(c, index, "embedId", v))} />
+              <TextInput label="ID do YouTube (ex: BshWPt2MYxI)" value={episode.youtubeId || ""} onChange={(v) => setContent((c) => updateEpisode(c, index, "youtubeId", v))} />
               <TextInput label="Link externo" value={episode.link} onChange={(v) => setContent((c) => updateEpisode(c, index, "link", v))} />
             </Grid>
           </RowCard>
@@ -246,13 +254,14 @@ function GalleryPanel({ content, setContent }: PanelProps) {
     <Panel title="Galeria" description="Suba fotos do Instagram, bastidores, eventos, ensaios e conteúdos de palco.">
       <TextInput label="Título" value={content.gallery.title} onChange={(v) => setContent((c) => ({ ...c, gallery: { ...c.gallery, title: v } }))} />
       <TextArea label="Descrição" value={content.gallery.description} onChange={(v) => setContent((c) => ({ ...c, gallery: { ...c.gallery, description: v } }))} />
-      <Repeater title="Fotos" onAdd={() => setContent((c) => ({ ...c, gallery: { ...c.gallery, items: [...c.gallery.items, { id: crypto.randomUUID(), image: c.home.heroBackgroundImage, alt: "Foto MAXIMUS", embedId: "", link: "https://www.instagram.com/eusoumaximus/" }] } }))}>
+      <Repeater title="Fotos" onAdd={() => setContent((c) => ({ ...c, gallery: { ...c.gallery, items: [...c.gallery.items, { id: crypto.randomUUID(), image: c.home.heroBackgroundImage, alt: "Foto MAXIMUS", embedId: "", youtubeId: "", link: "https://www.instagram.com/eusoumaximus/" }] } }))}>
         {content.gallery.items.map((item, index) => (
           <RowCard key={item.id} onRemove={() => setContent((c) => ({ ...c, gallery: { ...c.gallery, items: c.gallery.items.filter((_, i) => i !== index) } }))}>
             <ImageInput label="Imagem" value={item.image} onChange={(v) => setContent((c) => updateGallery(c, index, "image", v))} compact />
             <Grid>
               <TextInput label="Texto alternativo" value={item.alt} onChange={(v) => setContent((c) => updateGallery(c, index, "alt", v))} />
-              <TextInput label="Embed ID Instagram" value={item.embedId} onChange={(v) => setContent((c) => updateGallery(c, index, "embedId", v))} />
+              <TextInput label="Embed ID Instagram" value={item.embedId || ""} onChange={(v) => setContent((c) => updateGallery(c, index, "embedId", v))} />
+              <TextInput label="ID do YouTube" value={item.youtubeId || ""} onChange={(v) => setContent((c) => updateGallery(c, index, "youtubeId", v))} />
               <TextInput label="Link" value={item.link} onChange={(v) => setContent((c) => updateGallery(c, index, "link", v))} />
             </Grid>
           </RowCard>

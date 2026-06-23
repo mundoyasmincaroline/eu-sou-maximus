@@ -9,9 +9,9 @@ import { useEffect, useState } from "react";
 export const CMS_STORAGE_KEY = "maximus-cms-content-v1";
 
 export type CmsStat = { value: string; label: string };
-export type CmsEpisode = { id: string; number: string; title: string; guest: string; duration: string; image: string; embedId: string; link: string };
+export type CmsEpisode = { id: string; number: string; title: string; guest: string; duration: string; image: string; embedId: string; youtubeId: string; link: string };
 export type CmsEvent = { id: string; name: string; date: string; time: string; image: string; tag: string; description: string };
-export type CmsGalleryItem = { id: string; image: string; alt: string; embedId: string; link: string };
+export type CmsGalleryItem = { id: string; image: string; alt: string; embedId: string; youtubeId: string; link: string };
 export type CmsPlan = { id: string; title: string; level: string; price: string; description: string; items: string[]; featured?: boolean };
 export type CmsTestimonial = { quote: string; author: string };
 
@@ -23,6 +23,9 @@ export type CmsContent = {
     heroDescription: string;
     heroBackgroundImage: string;
     heroPortraitImage: string;
+    heroYoutubeId: string;
+    heroYoutubeStartTime: string;
+    heroYoutubeEndTime: string;
     stats: CmsStat[];
     programTitle: string;
     programDescription: string;
@@ -78,6 +81,9 @@ export const defaultCmsContent: CmsContent = {
     heroDescription: '"Agora que somos íntimos, me chama de Max."\nApresentador do Me Chama Que Eu Vou, criador do Maximus Experience Country e mentor de quem quer transformar presença em palco — e palco em resultado.',
     heroBackgroundImage: heroStage,
     heroPortraitImage: programBg,
+    heroYoutubeId: "BshWPt2MYxI",
+    heroYoutubeStartTime: "0",
+    heroYoutubeEndTime: "15",
     stats: [
       { value: "27.7K+", label: "Seguidores" },
       { value: "613+", label: "Publicações" },
@@ -98,12 +104,12 @@ export const defaultCmsContent: CmsContent = {
     heroDescription: "Programa autoral de Karlos Edward — o MAXIMUS. Episódios com convidados, bastidores, brincadeiras e conversas com quem está movimentando cultura, marca e palco no Brasil.",
     heroImage: programBg,
     episodes: [
-      { id: "ep-1", number: "01", title: "Episódio 1 - Circo do Dedé Santana", guest: "Pará de Minas", duration: "Instagram", image: programBg, embedId: "DZ02LcLJKlR", link: "https://www.instagram.com/p/DZ02LcLJKlR/" },
-      { id: "ep-2", number: "02", title: "Bastidores do palco country", guest: "Influência & moda", duration: "28 min", image: heroStage, embedId: "", link: INSTAGRAM_URL },
-      { id: "ep-3", number: "03", title: "Marcas que viraram cultura", guest: "Empreendedor do ano", duration: "41 min", image: programBg, embedId: "", link: INSTAGRAM_URL },
-      { id: "ep-4", number: "04", title: "A noite mais comentada do ano", guest: "Artista revelação", duration: "26 min", image: heroStage, embedId: "", link: INSTAGRAM_URL },
-      { id: "ep-5", number: "05", title: "Convidado surpresa & brincadeiras", guest: "Personalidade local", duration: "37 min", image: programBg, embedId: "", link: INSTAGRAM_URL },
-      { id: "ep-6", number: "06", title: "Networking sem firula", guest: "Mentor de negócios", duration: "33 min", image: heroStage, embedId: "", link: INSTAGRAM_URL },
+      { id: "ep-1", number: "01", title: "Me Chama Que Eu Vou - Episódio 1", guest: "Karlos Edward", duration: "YouTube", image: programBg, embedId: "", youtubeId: "BshWPt2MYxI", link: "https://youtu.be/BshWPt2MYxI" },
+      { id: "ep-2", number: "02", title: "Bastidores do palco country", guest: "Influência & moda", duration: "28 min", image: heroStage, embedId: "", youtubeId: "", link: INSTAGRAM_URL },
+      { id: "ep-3", number: "03", title: "Marcas que viraram cultura", guest: "Empreendedor do ano", duration: "41 min", image: programBg, embedId: "", youtubeId: "", link: INSTAGRAM_URL },
+      { id: "ep-4", number: "04", title: "A noite mais comentada do ano", guest: "Artista revelação", duration: "26 min", image: heroStage, embedId: "", youtubeId: "", link: INSTAGRAM_URL },
+      { id: "ep-5", number: "05", title: "Convidado surpresa & brincadeiras", guest: "Personalidade local", duration: "37 min", image: programBg, embedId: "", youtubeId: "", link: INSTAGRAM_URL },
+      { id: "ep-6", number: "06", title: "Networking sem firula", guest: "Mentor de negócios", duration: "33 min", image: heroStage, embedId: "", youtubeId: "", link: INSTAGRAM_URL },
     ],
   },
   events: {
@@ -120,14 +126,14 @@ export const defaultCmsContent: CmsContent = {
     title: "Palco, câmera e presença.",
     description: "Uma curadoria de momentos do programa, eventos e ensaios. Clique nas imagens para conferir no Instagram.",
     items: [
-      { id: "gallery-1", image: heroStage, alt: "Post do Instagram 1", embedId: "DZ02LcLJKlR", link: "https://www.instagram.com/p/DZ02LcLJKlR/" },
-      { id: "gallery-2", image: mentoria, alt: "Post do Instagram 2", embedId: "DZ2G18aJQ2q", link: "https://www.instagram.com/eusoumaximus/reel/DZ2G18aJQ2q/" },
-      { id: "gallery-3", image: eventCountry, alt: "Evento Maximus", embedId: "", link: INSTAGRAM_URL },
-      { id: "gallery-4", image: programBg, alt: "Programa Maximus", embedId: "", link: INSTAGRAM_URL },
-      { id: "gallery-5", image: textureGold, alt: "Branding Maximus", embedId: "", link: INSTAGRAM_URL },
-      { id: "gallery-6", image: heroStage, alt: "Palco Maximus", embedId: "", link: INSTAGRAM_URL },
-      { id: "gallery-7", image: eventCountry, alt: "Experience Country", embedId: "", link: INSTAGRAM_URL },
-      { id: "gallery-8", image: mentoria, alt: "Mentoria Maximus", embedId: "", link: INSTAGRAM_URL },
+      { id: "gallery-1", image: heroStage, alt: "Post do Instagram 1", embedId: "DZ02LcLJKlR", youtubeId: "", link: "https://www.instagram.com/p/DZ02LcLJKlR/" },
+      { id: "gallery-2", image: mentoria, alt: "Post do Instagram 2", embedId: "DZ2G18aJQ2q", youtubeId: "", link: "https://www.instagram.com/eusoumaximus/reel/DZ2G18aJQ2q/" },
+      { id: "gallery-3", image: eventCountry, alt: "Evento Maximus", embedId: "", youtubeId: "", link: INSTAGRAM_URL },
+      { id: "gallery-4", image: programBg, alt: "Programa Maximus", embedId: "", youtubeId: "", link: INSTAGRAM_URL },
+      { id: "gallery-5", image: textureGold, alt: "Branding Maximus", embedId: "", youtubeId: "", link: INSTAGRAM_URL },
+      { id: "gallery-6", image: heroStage, alt: "Palco Maximus", embedId: "", youtubeId: "", link: INSTAGRAM_URL },
+      { id: "gallery-7", image: eventCountry, alt: "Experience Country", embedId: "", youtubeId: "", link: INSTAGRAM_URL },
+      { id: "gallery-8", image: mentoria, alt: "Mentoria Maximus", embedId: "", youtubeId: "", link: INSTAGRAM_URL },
     ],
   },
   mentoria: {
