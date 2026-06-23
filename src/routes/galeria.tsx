@@ -4,7 +4,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { INSTAGRAM_URL } from "@/lib/site";
 import { Instagram, Play } from "lucide-react";
 import { VideoModal } from "@/components/VideoModal";
-import { useCmsContent } from "@/lib/cmsContent";
+import { useCmsContentState } from "@/lib/cmsContent";
 
 export const Route = createFileRoute("/galeria")({
   head: () => ({
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/galeria")({
 
 function Galeria() {
   const [activeEmbed, setActiveEmbed] = useState<string | null>(null);
-  const cms = useCmsContent();
+  const { content: cms, isLoading } = useCmsContentState();
 
   return (
     <div className="overflow-hidden">
@@ -30,7 +30,14 @@ function Galeria() {
           <Instagram className="h-4 w-4 text-gold" /> @eusoumaximus
         </a>
         <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
-          {cms.gallery.items.map((post, i) => {
+          {isLoading ? Array.from({ length: 8 }).map((_, i) => (
+            <div
+              key={i}
+              className={`relative overflow-hidden rounded-2xl bg-card/70 ring-1 ring-gold/15 ${i % 5 === 0 ? "row-span-2 aspect-[3/5]" : "aspect-[4/5]"}`}
+            >
+              <div className="absolute inset-0 shimmer opacity-40" />
+            </div>
+          )) : cms.gallery.items.map((post, i) => {
             const className = `block group relative overflow-hidden cursor-pointer rounded-2xl ring-1 ring-gold/15 bg-card/60 ${i % 5 === 0 ? "row-span-2 aspect-[3/5]" : "aspect-[4/5]"}`;
             
             return (
@@ -39,7 +46,7 @@ function Galeria() {
                 className={className}
                 onClick={() => post.embedId ? setActiveEmbed(post.embedId) : window.open(post.link, "_blank")}
               >
-                <img src={post.image} alt={post.alt || `Post do Instagram ${i + 1}`} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+                <GalleryImage src={post.image} alt={post.alt || `Post do Instagram ${i + 1}`} eager={i < 4} />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex flex-col justify-end p-4">
                   {post.embedId ? (
                     <span className="text-xs text-white uppercase tracking-wider font-semibold inline-flex items-center gap-2">
@@ -70,5 +77,26 @@ function Galeria() {
         embedId={activeEmbed}
       />
     </div>
+  );
+}
+
+function GalleryImage({ src, alt, eager }: { src: string; alt: string; eager: boolean }) {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <>
+      {!loaded && <div className="absolute inset-0 shimmer opacity-35" />}
+      <img
+        src={src}
+        alt={alt}
+        width={900}
+        height={1200}
+        className={`h-full w-full object-cover transition-all duration-700 group-hover:scale-110 ${loaded ? "opacity-100" : "opacity-0"}`}
+        loading={eager ? "eager" : "lazy"}
+        decoding="async"
+        fetchPriority={eager ? "high" : "auto"}
+        onLoad={() => setLoaded(true)}
+      />
+    </>
   );
 }

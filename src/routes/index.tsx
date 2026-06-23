@@ -5,7 +5,7 @@ import mentoria from "@/assets/mentoria.jpg";
 import textureGold from "@/assets/texture-gold.jpg";
 import { SectionHeader } from "@/components/SectionHeader";
 import { WHATSAPP_URL, INSTAGRAM_URL } from "@/lib/site";
-import { useCmsContent } from "@/lib/cmsContent";
+import { useCmsContentState } from "@/lib/cmsContent";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -20,10 +20,10 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const cms = useCmsContent();
+  const { content: cms, isLoading } = useCmsContentState();
   return (
     <div className="overflow-hidden">
-      <Hero content={cms.home} />
+      <Hero content={cms.home} isLoading={isLoading} />
       <Marquee />
       <Pillars />
       <ProgramTeaser content={cms} />
@@ -35,44 +35,42 @@ function Home() {
   );
 }
 
-function Hero({ content }: { content: ReturnType<typeof useCmsContent>["home"] }) {
+function Hero({ content, isLoading }: { content: ReturnType<typeof useCmsContentState>["content"]["home"]; isLoading: boolean }) {
   const [quote, ...rest] = content.heroDescription.split("\n");
   return (
-    <section className="relative isolate min-h-[92vh] overflow-hidden bg-background">
-      <img src={content.heroBackgroundImage} alt="" width={1920} height={1080} className="absolute inset-0 -z-20 h-full w-full object-cover opacity-70" />
+    <section className="relative isolate -mt-20 min-h-screen overflow-hidden bg-background pt-20">
+      {!isLoading && <img src={content.heroBackgroundImage} alt="" width={1920} height={1080} className="absolute inset-0 -z-30 h-full w-full object-cover object-center opacity-100" />}
 
-      {content.heroYoutubeId && (
-        <div className="absolute inset-0 -z-20 pointer-events-none overflow-hidden">
-          {/* Responsive 16:9 cover: whichever dimension is larger wins */}
+      {content.heroYoutubeId && !isLoading && (
+        <div className="absolute inset-0 -z-20 pointer-events-none overflow-hidden bg-background">
           <iframe
             title="Hero video background"
             src={`https://www.youtube.com/embed/${content.heroYoutubeId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${content.heroYoutubeId}&playsinline=1&start=${content.heroYoutubeStartTime || 0}&end=${content.heroYoutubeEndTime || 15}&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1`}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-60 h-[56.25vw] w-[100vw] min-h-full min-w-[177.78vh]"
+            className="absolute left-1/2 top-1/2 aspect-video h-auto min-h-full w-auto min-w-full -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-95"
             allow="autoplay; encrypted-media"
             frameBorder="0"
           />
         </div>
       )}
 
-      {/* Darker overlay so text is fully legible on top of video */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/70 via-background/75 to-background" />
-      <div className="absolute inset-0 -z-10 bg-background/40 md:bg-background/25" />
-      <div className="absolute inset-0 -z-10 noise opacity-60" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-background/90 via-background/55 to-background/10" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/45 via-transparent to-background" />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,oklch(0.12_0.012_30/0.35),transparent_45%,oklch(0.12_0.012_30/0.2))]" />
 
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-24 lg:grid-cols-12 lg:px-10 lg:py-32">
+      <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-12 px-5 py-12 sm:py-16 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-12 lg:px-10 lg:py-16 [@media(max-height:700px)]:gap-8 [@media(max-height:700px)]:py-6">
         <div className="lg:col-span-7">
-          <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-background/40 px-4 py-1.5 text-[11px] uppercase tracking-[0.32em] text-gold backdrop-blur">
+          <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-background/55 px-4 py-1.5 text-[11px] uppercase tracking-[0.32em] text-gold shadow-luxe backdrop-blur-md">
             <Sparkles className="h-3 w-3" /> {content.heroEyebrow}
           </div>
-          <h1 className="mt-6 font-display text-[clamp(3rem,9vw,7.5rem)] font-black leading-[0.92] tracking-tight">
+          <h1 className="mt-6 max-w-4xl font-display text-[clamp(3.2rem,8vw,7.5rem)] font-black leading-[0.9] tracking-tight drop-shadow-[0_8px_30px_oklch(0_0_0/0.65)] [@media(max-height:700px)]:mt-4 [@media(max-height:700px)]:text-[clamp(3rem,7vw,5.5rem)]">
             <span className="block text-gradient-gold">{content.heroTitle}</span>
-            <span className="mt-2 block text-2xl font-normal italic text-muted-foreground md:text-3xl">{content.heroSubtitle}</span>
+            <span className="mt-3 block text-2xl font-normal italic text-foreground md:text-3xl">{content.heroSubtitle}</span>
           </h1>
-          <p className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p className="mt-6 max-w-xl rounded-2xl border border-gold/15 bg-background/42 p-5 text-base leading-relaxed text-foreground/88 shadow-luxe backdrop-blur-md md:text-lg [@media(max-height:700px)]:mt-4 [@media(max-height:700px)]:p-4 [@media(max-height:700px)]:text-base">
             <span className="text-gold">{quote}</span><br />
             {rest.join(" ")}
           </p>
-          <div className="mt-10 flex flex-wrap items-center gap-4">
+          <div className="mt-8 flex flex-wrap items-center gap-4 [@media(max-height:700px)]:mt-5">
             <Link
               to="/contato"
               className="group inline-flex items-center gap-2 rounded-full gradient-gold px-7 py-4 text-sm font-semibold text-[oklch(0.12_0.012_30)] shadow-glow-gold transition-transform hover:scale-[1.03]"
@@ -90,7 +88,7 @@ function Hero({ content }: { content: ReturnType<typeof useCmsContent>["home"] }
               WhatsApp direto
             </a>
           </div>
-          <div className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-gold/15 pt-8">
+          <div className="mt-8 grid max-w-md grid-cols-3 gap-4 border-t border-gold/20 bg-background/20 pt-6 backdrop-blur-sm sm:gap-6 [@media(max-height:700px)]:hidden">
             {[
               ...content.stats,
             ].slice(0, 3).map((s) => (
@@ -102,7 +100,7 @@ function Hero({ content }: { content: ReturnType<typeof useCmsContent>["home"] }
           </div>
         </div>
 
-        <div className="relative lg:col-span-5">
+        <div className="relative hidden lg:col-span-5 xl:block">
           <div className="float-y relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-3xl shadow-luxe ring-1 ring-gold/30">
             <img src={content.heroPortraitImage} alt="MAXIMUS no estúdio" width={1600} height={1200} className="h-full w-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
@@ -172,7 +170,9 @@ function Pillars() {
   );
 }
 
-function ProgramTeaser({ content }: { content: ReturnType<typeof useCmsContent> }) {
+type SiteContent = ReturnType<typeof useCmsContentState>["content"];
+
+function ProgramTeaser({ content }: { content: SiteContent }) {
   return (
     <section className="relative overflow-hidden py-24 lg:py-32">
       <div className="absolute inset-0 -z-10">
@@ -217,7 +217,7 @@ function ProgramTeaser({ content }: { content: ReturnType<typeof useCmsContent> 
   );
 }
 
-function EventsTeaser({ content }: { content: ReturnType<typeof useCmsContent>["home"] }) {
+function EventsTeaser({ content }: { content: SiteContent["home"] }) {
   return (
     <section className="mx-auto max-w-7xl px-5 py-24 lg:px-10 lg:py-32">
       <div className="relative overflow-hidden rounded-3xl border border-gold/20 shadow-luxe">
@@ -247,7 +247,7 @@ function EventsTeaser({ content }: { content: ReturnType<typeof useCmsContent>["
   );
 }
 
-function MentoriaTeaser({ content }: { content: ReturnType<typeof useCmsContent>["home"] }) {
+function MentoriaTeaser({ content }: { content: SiteContent["home"] }) {
   return (
     <section className="mx-auto grid max-w-7xl gap-12 px-5 py-24 lg:grid-cols-2 lg:px-10 lg:py-32">
       <div className="relative aspect-[5/6] overflow-hidden rounded-3xl ring-1 ring-gold/20">
@@ -278,7 +278,7 @@ function MentoriaTeaser({ content }: { content: ReturnType<typeof useCmsContent>
   );
 }
 
-function Testimonials({ items }: { items: ReturnType<typeof useCmsContent>["testimonials"] }) {
+function Testimonials({ items }: { items: SiteContent["testimonials"] }) {
   return (
     <section className="border-y border-gold/15 bg-[oklch(0.09_0.012_30)] py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-5 lg:px-10">
@@ -301,7 +301,7 @@ function Testimonials({ items }: { items: ReturnType<typeof useCmsContent>["test
   );
 }
 
-function CTASection({ content }: { content: ReturnType<typeof useCmsContent>["home"] }) {
+function CTASection({ content }: { content: SiteContent["home"] }) {
   return (
     <section className="mx-auto max-w-7xl px-5 py-24 lg:px-10 lg:py-32">
       <div className="relative overflow-hidden rounded-3xl border border-gold/30 shadow-luxe">
