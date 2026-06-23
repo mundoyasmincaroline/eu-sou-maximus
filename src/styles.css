@@ -177,6 +177,7 @@
     background-clip: text;
     color: transparent;
     animation: gradientShine 8s linear infinite;
+    transform: translateZ(0);
   }
 
   @keyframes gradientShine {

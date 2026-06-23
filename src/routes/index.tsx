@@ -43,7 +43,7 @@ function Home() {
 
 function Hero({ content, isLoading }: { content: ReturnType<typeof useCmsContentState>["content"]["home"]; isLoading: boolean }) {
   return (
-    <section className="relative isolate min-h-[92vh] flex flex-col justify-start pt-28 md:justify-center md:pt-0 overflow-hidden bg-background">
+    <section className="relative isolate min-h-[92vh] flex flex-col justify-end pb-16 md:justify-center md:pb-0 overflow-hidden bg-background">
       {!isLoading && <img src={content.heroBackgroundImage} alt="" width={1920} height={1080} className="absolute inset-0 -z-30 h-full w-full object-cover object-center opacity-100" />}
 
       {content.heroYoutubeId && !isLoading && (
@@ -61,12 +61,17 @@ function Hero({ content, isLoading }: { content: ReturnType<typeof useCmsContent
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/40 via-background/70 to-background" />
       <div className="absolute inset-0 -z-10 noise" />
 
-      <div className="mx-auto w-full max-w-4xl text-center px-5 py-8 md:py-32">
+      {/* EYEBROW FIXED AT THE TOP ON MOBILE */}
+      <div className="absolute top-28 left-0 right-0 flex justify-center px-5 z-20 md:static md:mb-8">
         <div className="inline-flex items-center gap-2 rounded-full border border-crimson/30 bg-background/40 px-4 py-1.5 text-[10px] md:text-[11px] uppercase tracking-[0.32em] text-crimson backdrop-blur">
           <Sparkles className="h-3 w-3" /> {content.heroEyebrow}
         </div>
-        <h1 className="mt-6 md:mt-8 font-display text-[clamp(4rem,12vw,8.5rem)] font-black leading-[0.9] tracking-tight">
-          <span className="block text-gradient-crimson">{content.heroTitle}</span>
+      </div>
+
+      {/* MAIN TEXT AND BUTTONS PUSHED TO BOTTOM ON MOBILE */}
+      <div className="mx-auto w-full max-w-4xl text-center px-5 relative z-20">
+        <h1 className="font-display text-[clamp(4rem,12vw,8.5rem)] font-black leading-[0.9] tracking-tight">
+          <span className="block text-gradient-crimson pb-2">{content.heroTitle}</span>
           <span className="mt-2 md:mt-4 block text-2xl md:text-4xl font-normal italic text-muted-foreground">{content.heroSubtitle}</span>
         </h1>
         <div className="mt-8 md:mt-14 flex flex-col md:flex-row flex-wrap justify-center items-center gap-4">
