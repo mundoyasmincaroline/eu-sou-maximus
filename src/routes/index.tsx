@@ -42,10 +42,10 @@ function Hero({ content }: { content: ReturnType<typeof useCmsContent>["home"] }
       <img src={content.heroBackgroundImage} alt="" width={1920} height={1080} className="absolute inset-0 -z-20 h-full w-full object-cover opacity-70" />
       
       {content.heroYoutubeId && (
-        <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden mix-blend-screen">
+        <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden opacity-50">
           <iframe
-            src={`https://www.youtube.com/embed/${content.heroYoutubeId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${content.heroYoutubeId}&playsinline=1&start=${content.heroYoutubeStartTime || 0}&end=${content.heroYoutubeEndTime || 15}`}
-            className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 opacity-70"
+            src={`https://www.youtube.com/embed/${content.heroYoutubeId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${content.heroYoutubeId}&playsinline=1&start=${content.heroYoutubeStartTime || 0}&end=${content.heroYoutubeEndTime || 15}&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1`}
+            className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 scale-150 md:scale-125 pointer-events-none"
             allow="autoplay; encrypted-media"
             frameBorder="0"
           />
