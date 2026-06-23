@@ -354,15 +354,33 @@ function ReelSection() {
         title={<>A Verdade sobre <span className="text-gradient-crimson italic">Posicionamento.</span></>}
       />
       <div className="mt-14 flex justify-center">
-        <div className="relative w-full max-w-sm overflow-hidden rounded-3xl shadow-luxe ring-1 ring-crimson/30 bg-black">
-          <iframe
-            src="https://www.instagram.com/p/DIXYnLjuS9X/embed/?theme=dark"
-            className="w-full aspect-[9/16]"
-            frameBorder="0"
-            scrolling="no"
-            allowTransparency={true}
-          ></iframe>
-        </div>
+        <a 
+          href="https://www.instagram.com/reels/DIXYnLjuS9X/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="group relative flex w-full max-w-sm flex-col items-center justify-center overflow-hidden rounded-3xl shadow-luxe ring-1 ring-crimson/30 aspect-[4/5] bg-background"
+        >
+          <img src={texturecrimson} alt="Background" className="absolute inset-0 h-full w-full object-cover opacity-50 transition-transform duration-700 group-hover:scale-110" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/80" />
+          
+          <div className="relative z-10 flex flex-col items-center gap-6 p-8 text-center">
+            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-crimson/20 backdrop-blur-md ring-1 ring-crimson/50 transition-transform duration-300 group-hover:scale-110 group-hover:bg-crimson/30 shadow-glow-crimson">
+              <Play className="h-8 w-8 text-white ml-1" fill="currentColor" />
+            </div>
+            
+            <div>
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-widest text-white backdrop-blur-md">
+                <Instagram className="h-3 w-3" /> Assista no Instagram
+              </div>
+              <h3 className="font-display text-3xl font-bold text-white leading-tight drop-shadow-xl">
+                1 Mês de Conteúdo em <span className="text-gradient-crimson italic">1 Dia.</span>
+              </h3>
+              <p className="mt-4 text-sm text-foreground/80 drop-shadow-md">
+                A estratégia por trás de uma imagem agenciada e um posicionamento de alto valor.
+              </p>
+            </div>
+          </div>
+        </a>
       </div>
     </section>
   );
