@@ -40,20 +40,24 @@ function Hero({ content }: { content: ReturnType<typeof useCmsContent>["home"] }
   return (
     <section className="relative isolate min-h-[92vh] overflow-hidden bg-background">
       <img src={content.heroBackgroundImage} alt="" width={1920} height={1080} className="absolute inset-0 -z-20 h-full w-full object-cover opacity-70" />
-      
+
       {content.heroYoutubeId && (
-        <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden opacity-50">
+        <div className="absolute inset-0 -z-20 pointer-events-none overflow-hidden">
+          {/* Responsive 16:9 cover: whichever dimension is larger wins */}
           <iframe
+            title="Hero video background"
             src={`https://www.youtube.com/embed/${content.heroYoutubeId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${content.heroYoutubeId}&playsinline=1&start=${content.heroYoutubeStartTime || 0}&end=${content.heroYoutubeEndTime || 15}&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1`}
-            className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 scale-150 md:scale-125 pointer-events-none"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-60 h-[56.25vw] w-[100vw] min-h-full min-w-[177.78vh]"
             allow="autoplay; encrypted-media"
             frameBorder="0"
           />
         </div>
       )}
-      
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/40 via-background/70 to-background" />
-      <div className="absolute inset-0 -z-10 noise" />
+
+      {/* Darker overlay so text is fully legible on top of video */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/70 via-background/75 to-background" />
+      <div className="absolute inset-0 -z-10 bg-background/40 md:bg-background/25" />
+      <div className="absolute inset-0 -z-10 noise opacity-60" />
 
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-24 lg:grid-cols-12 lg:px-10 lg:py-32">
         <div className="lg:col-span-7">
