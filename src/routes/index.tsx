@@ -4,6 +4,7 @@ import eventCountry from "@/assets/event-country.jpg";
 import mentoria from "@/assets/mentoria.jpg";
 import textureGold from "@/assets/texture-gold.jpg";
 import { SectionHeader } from "@/components/SectionHeader";
+import { AgencyTeaser } from "@/components/AgencyTeaser";
 import { WHATSAPP_URL, INSTAGRAM_URL } from "@/lib/site";
 import { useCmsContentState } from "@/lib/cmsContent";
 
@@ -286,43 +287,6 @@ function MentoriaTeaser({ content }: { content: SiteContent["home"] }) {
             Conhecer mentoria <ArrowRight className="h-4 w-4 text-gold" />
           </Link>
         </div>
-      </div>
-    </section>
-  );
-}
-
-function AgencyTeaser({ content }: { content: SiteContent["home"] }) {
-  return (
-    <section className="mx-auto grid max-w-7xl gap-12 px-5 py-24 lg:grid-cols-2 lg:px-10 lg:py-32">
-      <div className="flex flex-col justify-center lg:order-2">
-        <SectionHeader
-          eyebrow="Maximus Agência Digital"
-          title={<>{content.agencyTitle.split(" ").slice(0, 3).join(" ")} <br /><span className="italic text-gradient-gold">{content.agencyTitle.split(" ").slice(3).join(" ") || content.agencyTitle}</span></>}
-          description={content.agencyDescription}
-        />
-        <ul className="mt-8 space-y-3 text-sm text-foreground/85">
-          {content.agencyBullets.map((b) => (
-            <li key={b} className="flex items-start gap-3">
-              <Star className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-              <span>{b}</span>
-            </li>
-          ))}
-        </ul>
-        <div className="mt-10">
-          <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full gradient-gold px-7 py-3.5 text-sm font-semibold text-[oklch(0.12_0.012_30)] shadow-glow-gold">
-            Agendar Reunião <ArrowRight className="h-4 w-4" />
-          </a>
-        </div>
-      </div>
-      <div className="relative aspect-[9/16] w-full max-w-sm mx-auto overflow-hidden rounded-3xl ring-1 ring-gold/20 lg:order-1 bg-background/50 shadow-luxe">
-        <iframe 
-          src={`https://www.instagram.com/reel/${content.agencyInstagramId}/embed`}
-          className="absolute inset-0 w-full h-full"
-          frameBorder="0"
-          scrolling="no"
-          allowTransparency={true}
-          allow="encrypted-media"
-        />
       </div>
     </section>
   );

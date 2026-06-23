@@ -196,6 +196,7 @@ function HomePanel({ content, setContent }: PanelProps) {
       <TextInput label="Título teaser agência" value={content.home.agencyTitle} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, agencyTitle: v } }))} />
       <TextArea label="Descrição teaser agência" value={content.home.agencyDescription} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, agencyDescription: v } }))} />
       <TextInput label="ID do Reels Instagram (Agência)" value={content.home.agencyInstagramId} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, agencyInstagramId: v } }))} />
+      <ImageInput label="Imagem de capa (Agência)" value={content.home.agencyImage} onChange={(image) => setContent((c) => ({ ...c, home: { ...c.home, agencyImage: image } }))} />
       <TextInput label="Título CTA final" value={content.home.ctaTitle} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, ctaTitle: v } }))} />
       <TextArea label="Descrição CTA final" value={content.home.ctaDescription} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, ctaDescription: v } }))} />
     </Panel>

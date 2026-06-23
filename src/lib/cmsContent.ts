@@ -38,6 +38,7 @@ export type CmsContent = {
     agencyDescription: string;
     agencyBullets: string[];
     agencyInstagramId: string;
+    agencyImage: string;
     ctaTitle: string;
     ctaDescription: string;
   };
@@ -104,6 +105,7 @@ export const defaultCmsContent: CmsContent = {
     agencyDescription: "Na Maximus Agência Digital, nossa metodologia foca em otimizar seu tempo e elevar a percepção de valor da sua marca com estratégia, estética e constância.",
     agencyBullets: ["Moodboard e direção de arte", "Captação presencial comigo", "15 conteúdos prontos (vídeos e fotos)", "Reunião estratégica e suporte"],
     agencyInstagramId: "DIXYnLjuS9X",
+    agencyImage: mentoria,
     ctaTitle: "Pronto pra chamar o Max?",
     ctaDescription: "Conte rapidinho o que você precisa — parceria, evento, quadro no programa ou mentoria — e a equipe te leva direto ao WhatsApp do Maximus.",
   },

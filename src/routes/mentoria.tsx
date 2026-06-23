@@ -4,6 +4,7 @@ import { GraduationCap, Check, ArrowRight, Crown, Play } from "lucide-react";
 import textureGold from "@/assets/texture-gold.jpg";
 import { SectionHeader } from "@/components/SectionHeader";
 import { VideoModal } from "@/components/VideoModal";
+import { AgencyTeaser } from "@/components/AgencyTeaser";
 import { useCmsContent } from "@/lib/cmsContent";
 export const Route = createFileRoute("/mentoria")({
   head: () => ({
@@ -100,7 +101,11 @@ function Mentoria() {
         ))}
       </section>
 
-      <section className="mx-auto max-w-5xl px-5 pb-24 text-center lg:px-10">
+      <div className="bg-card/40 border-y border-gold/15 pb-8">
+        <AgencyTeaser content={cms.home} />
+      </div>
+
+      <section className="mx-auto max-w-5xl px-5 pb-24 pt-24 text-center lg:px-10">
         <SectionHeader align="center" eyebrow="Para quem" title={<>Feita pra quem <span className="italic text-gradient-gold">já decidiu crescer.</span></>} description={cms.mentoria.audienceDescription} />
       </section>
     </div>
