@@ -5,7 +5,7 @@ import mentoria from "@/assets/mentoria.jpg";
 import textureGold from "@/assets/texture-gold.jpg";
 import { SectionHeader } from "@/components/SectionHeader";
 import { WHATSAPP_URL, INSTAGRAM_URL } from "@/lib/site";
-import { useCmsContent } from "@/lib/cmsContent";
+import { useCmsContentState } from "@/lib/cmsContent";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -20,10 +20,10 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const cms = useCmsContent();
+  const { content: cms, isLoading } = useCmsContentState();
   return (
     <div className="overflow-hidden">
-      <Hero content={cms.home} />
+      <Hero content={cms.home} isLoading={isLoading} />
       <Marquee />
       <AboutSection content={cms.home} />
       <Pillars />
@@ -36,22 +36,23 @@ function Home() {
   );
 }
 
-function Hero({ content }: { content: ReturnType<typeof useCmsContent>["home"] }) {
+function Hero({ content, isLoading }: { content: ReturnType<typeof useCmsContentState>["content"]["home"]; isLoading: boolean }) {
   return (
     <section className="relative isolate min-h-[92vh] flex flex-col justify-center overflow-hidden bg-background">
-      <img src={content.heroBackgroundImage} alt="" width={1920} height={1080} className="absolute inset-0 -z-20 h-full w-full object-cover opacity-70" />
-      
-      {content.heroYoutubeId && (
-        <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden opacity-50">
+      {!isLoading && <img src={content.heroBackgroundImage} alt="" width={1920} height={1080} className="absolute inset-0 -z-30 h-full w-full object-cover object-center opacity-100" />}
+
+      {content.heroYoutubeId && !isLoading && (
+        <div className="absolute inset-0 -z-20 pointer-events-none overflow-hidden bg-background">
           <iframe
+            title="Hero video background"
             src={`https://www.youtube.com/embed/${content.heroYoutubeId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${content.heroYoutubeId}&playsinline=1&start=${content.heroYoutubeStartTime || 0}&end=${content.heroYoutubeEndTime || 15}&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1`}
-            className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 scale-150 md:scale-125 pointer-events-none"
+            className="absolute left-1/2 top-1/2 aspect-video h-auto min-h-full w-auto min-w-full -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-95"
             allow="autoplay; encrypted-media"
             frameBorder="0"
           />
         </div>
       )}
-      
+
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/40 via-background/70 to-background" />
       <div className="absolute inset-0 -z-10 noise" />
 
@@ -86,7 +87,7 @@ function Hero({ content }: { content: ReturnType<typeof useCmsContent>["home"] }
   );
 }
 
-function AboutSection({ content }: { content: ReturnType<typeof useCmsContent>["home"] }) {
+function AboutSection({ content }: { content: ReturnType<typeof useCmsContentState>["content"]["home"] }) {
   const [quote, ...rest] = content.heroDescription.split("\n");
   
   return (
@@ -181,7 +182,9 @@ function Pillars() {
   );
 }
 
-function ProgramTeaser({ content }: { content: ReturnType<typeof useCmsContent> }) {
+type SiteContent = ReturnType<typeof useCmsContentState>["content"];
+
+function ProgramTeaser({ content }: { content: SiteContent }) {
   return (
     <section className="relative overflow-hidden py-24 lg:py-32">
       <div className="absolute inset-0 -z-10">
@@ -226,7 +229,7 @@ function ProgramTeaser({ content }: { content: ReturnType<typeof useCmsContent> 
   );
 }
 
-function EventsTeaser({ content }: { content: ReturnType<typeof useCmsContent>["home"] }) {
+function EventsTeaser({ content }: { content: SiteContent["home"] }) {
   return (
     <section className="mx-auto max-w-7xl px-5 py-24 lg:px-10 lg:py-32">
       <div className="relative overflow-hidden rounded-3xl border border-gold/20 shadow-luxe">
@@ -256,7 +259,7 @@ function EventsTeaser({ content }: { content: ReturnType<typeof useCmsContent>["
   );
 }
 
-function MentoriaTeaser({ content }: { content: ReturnType<typeof useCmsContent>["home"] }) {
+function MentoriaTeaser({ content }: { content: SiteContent["home"] }) {
   return (
     <section className="mx-auto grid max-w-7xl gap-12 px-5 py-24 lg:grid-cols-2 lg:px-10 lg:py-32">
       <div className="relative aspect-[5/6] overflow-hidden rounded-3xl ring-1 ring-gold/20">
@@ -287,7 +290,7 @@ function MentoriaTeaser({ content }: { content: ReturnType<typeof useCmsContent>
   );
 }
 
-function Testimonials({ items }: { items: ReturnType<typeof useCmsContent>["testimonials"] }) {
+function Testimonials({ items }: { items: SiteContent["testimonials"] }) {
   return (
     <section className="border-y border-gold/15 bg-[oklch(0.09_0.012_30)] py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-5 lg:px-10">
@@ -310,7 +313,7 @@ function Testimonials({ items }: { items: ReturnType<typeof useCmsContent>["test
   );
 }
 
-function CTASection({ content }: { content: ReturnType<typeof useCmsContent>["home"] }) {
+function CTASection({ content }: { content: SiteContent["home"] }) {
   return (
     <section className="mx-auto max-w-7xl px-5 py-24 lg:px-10 lg:py-32">
       <div className="relative overflow-hidden rounded-3xl border border-gold/30 shadow-luxe">
