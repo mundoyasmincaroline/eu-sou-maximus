@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState, type ChangeEvent, type Dispatch, type FormEvent, type ReactNode, type SetStateAction } from "react";
+import { useMemo, useState, useEffect, type ChangeEvent, type Dispatch, type FormEvent, type ReactNode, type SetStateAction } from "react";
 import { ArrowLeft, Camera, Check, Download, Eye, Image, Lock, LogOut, Plus, RotateCcw, Save, Trash2, Upload } from "lucide-react";
 import { CMS_STORAGE_KEY, defaultCmsContent, loadCmsContent, resetCmsContent, saveCmsContent, type CmsContent } from "@/lib/cmsContent";
 
@@ -72,9 +72,17 @@ function AdminPage() {
 }
 
 function AdminEditor({ onLogout }: { onLogout: () => void }) {
-  const [content, setContent] = useState<CmsContent>(() => loadCmsContent());
+  const [content, setContent] = useState<CmsContent>(defaultCmsContent);
+  const [isLoading, setIsLoading] = useState(true);
   const [active, setActive] = useState("home");
   const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    loadCmsContent().then((data) => {
+      setContent(data);
+      setIsLoading(false);
+    });
+  }, []);
 
   const tabs = useMemo(() => [
     { id: "home", label: "Home" },
@@ -86,8 +94,8 @@ function AdminEditor({ onLogout }: { onLogout: () => void }) {
     { id: "backup", label: "Backup" },
   ], []);
 
-  function persist(next = content) {
-    saveCmsContent(next);
+  async function persist(next = content) {
+    await saveCmsContent(next);
     setSaved(true);
     window.setTimeout(() => setSaved(false), 1800);
   }
@@ -97,6 +105,14 @@ function AdminEditor({ onLogout }: { onLogout: () => void }) {
     setContent(defaultCmsContent);
     setSaved(true);
     window.setTimeout(() => setSaved(false), 1800);
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <div className="text-sm font-semibold uppercase tracking-[0.3em] text-gold animate-pulse">Carregando painel...</div>
+      </div>
+    );
   }
 
   return (
