@@ -5,8 +5,10 @@ import mentoria from "@/assets/mentoria.jpg";
 import texturecrimson from "@/assets/texture-crimson.jpg";
 import { SectionHeader } from "@/components/SectionHeader";
 import { AgencyTeaser } from "@/components/AgencyTeaser";
+import { VideoModal } from "@/components/VideoModal";
 import { WHATSAPP_URL, INSTAGRAM_URL } from "@/lib/site";
 import { useCmsContentState } from "@/lib/cmsContent";
+import { useState } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -346,6 +348,8 @@ function CTASection({ content }: { content: SiteContent["home"] }) {
 }
 
 function ReelSection() {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+
   return (
     <section className="mx-auto max-w-7xl px-5 py-24 lg:px-10 lg:py-32">
       <SectionHeader
@@ -354,11 +358,9 @@ function ReelSection() {
         title={<>A Verdade sobre <span className="text-gradient-crimson italic">Posicionamento.</span></>}
       />
       <div className="mt-14 flex justify-center">
-        <a 
-          href="https://www.instagram.com/reels/DIXYnLjuS9X/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="group relative flex w-full max-w-sm flex-col items-center justify-center overflow-hidden rounded-3xl shadow-luxe ring-1 ring-crimson/30 aspect-[4/5] bg-background"
+        <button 
+          onClick={() => setIsVideoOpen(true)}
+          className="group relative flex w-full max-w-sm flex-col items-center justify-center overflow-hidden rounded-3xl shadow-luxe ring-1 ring-crimson/30 aspect-[4/5] bg-background cursor-pointer text-left"
         >
           <img src={texturecrimson} alt="Background" className="absolute inset-0 h-full w-full object-cover opacity-50 transition-transform duration-700 group-hover:scale-110" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/80" />
@@ -370,7 +372,7 @@ function ReelSection() {
             
             <div>
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-widest text-white backdrop-blur-md">
-                <Instagram className="h-3 w-3" /> Assista no Instagram
+                <Play className="h-3 w-3" /> Assistir Agora
               </div>
               <h3 className="font-display text-3xl font-bold text-white leading-tight drop-shadow-xl">
                 1 Mês de Conteúdo em <span className="text-gradient-crimson italic">1 Dia.</span>
@@ -380,8 +382,14 @@ function ReelSection() {
               </p>
             </div>
           </div>
-        </a>
+        </button>
       </div>
+      
+      <VideoModal 
+        isOpen={isVideoOpen} 
+        onClose={() => setIsVideoOpen(false)} 
+        embedId="DIXYnLjuS9X" 
+      />
     </section>
   );
 }
