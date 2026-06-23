@@ -34,6 +34,10 @@ export type CmsContent = {
     mentoriaTitle: string;
     mentoriaDescription: string;
     mentoriaBullets: string[];
+    agencyTitle: string;
+    agencyDescription: string;
+    agencyBullets: string[];
+    agencyInstagramId: string;
     ctaTitle: string;
     ctaDescription: string;
   };
@@ -96,6 +100,10 @@ export const defaultCmsContent: CmsContent = {
     mentoriaTitle: "Você não é POBRE, você só tem MAU posicionamento.",
     mentoriaDescription: "Sessões fechadas para apresentadores, criadores e empreendedores que querem ocupar palco, dominar câmera e construir uma marca pessoal que vende sem precisar pedir.",
     mentoriaBullets: ["Posicionamento de marca pessoal", "Presença de palco e câmera", "Conteúdo que converte parceria", "Networking estratégico de alto nível"],
+    agencyTitle: "O conteúdo do mês em 1 dia.",
+    agencyDescription: "Na Maximus Agência Digital, nossa metodologia foca em otimizar seu tempo e elevar a percepção de valor da sua marca com estratégia, estética e constância.",
+    agencyBullets: ["Moodboard e direção de arte", "Captação presencial comigo", "15 conteúdos prontos (vídeos e fotos)", "Reunião estratégica e suporte"],
+    agencyInstagramId: "DIXYnLjuS9X",
     ctaTitle: "Pronto pra chamar o Max?",
     ctaDescription: "Conte rapidinho o que você precisa — parceria, evento, quadro no programa ou mentoria — e a equipe te leva direto ao WhatsApp do Maximus.",
   },

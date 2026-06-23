@@ -193,6 +193,9 @@ function HomePanel({ content, setContent }: PanelProps) {
       <TextArea label="Descrição teaser eventos" value={content.home.eventsDescription} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, eventsDescription: v } }))} />
       <TextInput label="Título teaser mentoria" value={content.home.mentoriaTitle} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, mentoriaTitle: v } }))} />
       <TextArea label="Descrição teaser mentoria" value={content.home.mentoriaDescription} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, mentoriaDescription: v } }))} />
+      <TextInput label="Título teaser agência" value={content.home.agencyTitle} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, agencyTitle: v } }))} />
+      <TextArea label="Descrição teaser agência" value={content.home.agencyDescription} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, agencyDescription: v } }))} />
+      <TextInput label="ID do Reels Instagram (Agência)" value={content.home.agencyInstagramId} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, agencyInstagramId: v } }))} />
       <TextInput label="Título CTA final" value={content.home.ctaTitle} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, ctaTitle: v } }))} />
       <TextArea label="Descrição CTA final" value={content.home.ctaDescription} onChange={(v) => setContent((c) => ({ ...c, home: { ...c.home, ctaDescription: v } }))} />
     </Panel>
