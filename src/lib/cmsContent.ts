@@ -162,6 +162,25 @@ export const defaultCmsContent: CmsContent = {
   },
 };
 
+const assetAliases = [
+  { match: /\/assets\/hero-stage-[\w-]+\.jpg$/, value: heroStage },
+  { match: /\/assets\/event-country-[\w-]+\.jpg$/, value: eventCountry },
+  { match: /\/assets\/mentoria-[\w-]+\.jpg$/, value: mentoria },
+  { match: /\/assets\/program-bg-[\w-]+\.jpg$/, value: programBg },
+  { match: /\/assets\/texture-gold-[\w-]+\.jpg$/, value: textureGold },
+];
+
+function normalizeAssetUrl(value: string) {
+  return assetAliases.find((asset) => asset.match.test(value))?.value ?? value;
+}
+
+function normalizeContentAssets<T>(value: T): T {
+  if (typeof value === "string") return normalizeAssetUrl(value) as T;
+  if (Array.isArray(value)) return value.map(normalizeContentAssets) as T;
+  if (!isPlainObject(value)) return value;
+  return Object.fromEntries(Object.entries(value).map(([key, entry]) => [key, normalizeContentAssets(entry)])) as T;
+}
+
 function isPlainObject(value: unknown): value is Record<string, unknown> {
   return !!value && typeof value === "object" && !Array.isArray(value);
 }
@@ -185,7 +204,7 @@ export async function loadCmsContent(): Promise<CmsContent> {
       console.warn("CMS Content not found in Supabase or error. Falling back to default.", error);
       return defaultCmsContent;
     }
-    return mergeContent(defaultCmsContent, data.content);
+    return normalizeContentAssets(mergeContent(defaultCmsContent, data.content));
   } catch (err) {
     console.error("Failed to load CMS from Supabase", err);
     return defaultCmsContent;
@@ -215,23 +234,36 @@ export function resetCmsContent() {
   window.dispatchEvent(new Event("maximus-cms-updated"));
 }
 
-export function useCmsContent() {
+export function useCmsContentState() {
   const [content, setContent] = useState<CmsContent>(defaultCmsContent);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let mounted = true;
     
-    const fetchContent = async () => {
-      setIsLoading(true);
+    const fetchContent = async (showLoading: boolean) => {
+      if (showLoading) setIsLoading(true);
       const data = await loadCmsContent();
       if (mounted) {
         setContent(data);
+        window.localStorage.setItem(CMS_STORAGE_KEY, JSON.stringify(data));
         setIsLoading(false);
       }
     };
     
-    fetchContent();
+    let hasCachedContent = false;
+    try {
+      const stored = window.localStorage.getItem(CMS_STORAGE_KEY);
+      if (stored) {
+        setContent(normalizeContentAssets(mergeContent(defaultCmsContent, JSON.parse(stored))));
+        setIsLoading(false);
+        hasCachedContent = true;
+      }
+    } catch (err) {
+      console.warn("Failed to read cached CMS content", err);
+    }
+
+    fetchContent(!hasCachedContent);
 
     const syncLocal = () => {
       const stored = window.localStorage.getItem(CMS_STORAGE_KEY);
@@ -246,7 +278,9 @@ export function useCmsContent() {
     const channel = supabase.channel('schema-db-changes')
       .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'site_settings' }, (payload) => {
         if (payload.new && payload.new.content) {
-          setContent(mergeContent(defaultCmsContent, payload.new.content));
+          const nextContent = normalizeContentAssets(mergeContent(defaultCmsContent, payload.new.content));
+          setContent(nextContent);
+          window.localStorage.setItem(CMS_STORAGE_KEY, JSON.stringify(nextContent));
         }
       })
       .subscribe();
@@ -258,5 +292,9 @@ export function useCmsContent() {
     };
   }, []);
 
-  return content;
+  return { content, isLoading };
+}
+
+export function useCmsContent() {
+  return useCmsContentState().content;
 }
