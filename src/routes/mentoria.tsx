@@ -10,7 +10,7 @@ export const Route = createFileRoute("/mentoria")({
   head: () => ({
     meta: [
       { title: "Mentoria MAXIMUS — Marca pessoal, palco e posicionamento" },
-      { name: "description", content: "Mentoria de marca pessoal, presença de palco e posicionamento com Karlos Edward (MAXIMUS) para apresentadores, criadores e empreendedores." },
+      { name: "description", content: "Mentoria de marca pessoal, presença de palco e posicionamento com Max (MAXIMUS) para apresentadores, criadores e empreendedores." },
       { property: "og:title", content: "Mentoria MAXIMUS" },
       { property: "og:description", content: "Posicionamento, palco e marca pessoal de alto nível." },
     ],

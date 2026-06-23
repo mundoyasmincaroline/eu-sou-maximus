@@ -9,7 +9,7 @@ export const Route = createFileRoute("/programa")({
   head: () => ({
     meta: [
       { title: "Me Chama Que Eu Vou — Programa oficial de MAXIMUS" },
-      { name: "description", content: "Página oficial do programa Me Chama Que Eu Vou, apresentado por Karlos Edward (MAXIMUS). Episódios, convidados e bastidores." },
+      { name: "description", content: "Página oficial do programa Me Chama Que Eu Vou, apresentado por Max (MAXIMUS). Episódios, convidados e bastidores." },
       { property: "og:title", content: "Me Chama Que Eu Vou — MAXIMUS" },
       { property: "og:description", content: "Conheça os episódios e participe do programa." },
     ],

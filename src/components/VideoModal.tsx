@@ -40,10 +40,10 @@ export function VideoModal({ isOpen, onClose, embedId, youtubeId }: VideoModalPr
             allowFullScreen
           ></iframe>
         ) : embedId ? (
-          <div className="absolute inset-0 flex justify-center">
+          <div className="absolute inset-0 flex justify-center bg-black">
             <iframe
-              src={`https://www.instagram.com/p/${embedId}/embed`}
-              className="w-full max-w-md h-full bg-white"
+              src={`https://www.instagram.com/p/${embedId}/embed/?theme=dark`}
+              className="w-full max-w-md h-full bg-transparent"
               frameBorder="0"
               scrolling="no"
               allowTransparency={true}

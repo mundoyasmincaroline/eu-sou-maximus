@@ -8,7 +8,7 @@ export const Route = createFileRoute("/contato")({
   head: () => ({
     meta: [
       { title: "Contato MAXIMUS — Parcerias, eventos e quadro do programa" },
-      { name: "description", content: "Funil de contato profissional com Karlos Edward (MAXIMUS): parcerias de marca, quadro do programa Me Chama Que Eu Vou, presença em eventos e mentoria. Atendimento direto via WhatsApp." },
+      { name: "description", content: "Funil de contato profissional com Max (MAXIMUS): parcerias de marca, quadro do programa Me Chama Que Eu Vou, presença em eventos e mentoria. Atendimento direto via WhatsApp." },
       { property: "og:title", content: "Contato MAXIMUS" },
       { property: "og:description", content: "Fale direto com a equipe de Maximus pelo WhatsApp." },
     ],

@@ -12,7 +12,7 @@ export function Logo({ className = "" }: { className?: string }) {
           MAXIMUS
         </span>
         <span className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
-          Karlos Edward
+          Max
         </span>
       </span>
     </Link>

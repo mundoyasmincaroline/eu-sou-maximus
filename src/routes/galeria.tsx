@@ -10,7 +10,7 @@ export const Route = createFileRoute("/galeria")({
   head: () => ({
     meta: [
       { title: "Galeria MAXIMUS — Fotos, palco e bastidores" },
-      { name: "description", content: "Galeria oficial com fotos de Karlos Edward (MAXIMUS): palco, eventos, bastidores do Me Chama Que Eu Vou e moda." },
+      { name: "description", content: "Galeria oficial com fotos de Max (MAXIMUS): palco, eventos, bastidores do Me Chama Que Eu Vou e moda." },
       { property: "og:title", content: "Galeria MAXIMUS" },
       { property: "og:description", content: "Fotos, palco e bastidores." },
     ],

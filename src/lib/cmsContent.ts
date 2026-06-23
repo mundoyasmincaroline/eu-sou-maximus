@@ -82,7 +82,7 @@ export const defaultCmsContent: CmsContent = {
   home: {
     heroEyebrow: "Apresentador · Influenciador · Host",
     heroTitle: "MAXIMUS",
-    heroSubtitle: "por Karlos Edward",
+    heroSubtitle: "por Max",
     heroDescription: '"Agora que somos íntimos, me chama de Max."\nApresentador do Me Chama Que Eu Vou, criador do Maximus Experience Country e mentor de quem quer transformar presença em palco — e palco em resultado.',
     heroBackgroundImage: heroStage,
     heroPortraitImage: programBg,
@@ -111,10 +111,10 @@ export const defaultCmsContent: CmsContent = {
   },
   program: {
     heroTitle: "Me Chama Que Eu Vou.",
-    heroDescription: "Programa autoral de Karlos Edward — o MAXIMUS. Episódios com convidados, bastidores, brincadeiras e conversas com quem está movimentando cultura, marca e palco no Brasil.",
+    heroDescription: "Programa autoral de Max — o MAXIMUS. Episódios com convidados, bastidores, brincadeiras e conversas com quem está movimentando cultura, marca e palco no Brasil.",
     heroImage: programBg,
     episodes: [
-      { id: "ep-1", number: "01", title: "Me Chama Que Eu Vou - Episódio 1", guest: "Karlos Edward", duration: "YouTube", image: programBg, embedId: "", youtubeId: "BshWPt2MYxI", link: "https://youtu.be/BshWPt2MYxI" },
+      { id: "ep-1", number: "01", title: "Me Chama Que Eu Vou - Episódio 1", guest: "Max", duration: "YouTube", image: programBg, embedId: "", youtubeId: "BshWPt2MYxI", link: "https://youtu.be/BshWPt2MYxI" },
       { id: "ep-2", number: "02", title: "Bastidores do palco country", guest: "Influência & moda", duration: "28 min", image: heroStage, embedId: "", youtubeId: "", link: INSTAGRAM_URL },
       { id: "ep-3", number: "03", title: "Marcas que viraram cultura", guest: "Empreendedor do ano", duration: "41 min", image: programBg, embedId: "", youtubeId: "", link: INSTAGRAM_URL },
       { id: "ep-4", number: "04", title: "A noite mais comentada do ano", guest: "Artista revelação", duration: "26 min", image: heroStage, embedId: "", youtubeId: "", link: INSTAGRAM_URL },
@@ -151,7 +151,7 @@ export const defaultCmsContent: CmsContent = {
     heroDescription: '"Você não é POBRE, você só tem MAU posicionamento." Mentoria sem firula, com método e direção, para quem quer transformar presença em palco e palco em resultado.',
     heroImage: mentoria,
     featureTitle: "Você não é pobre, você só tem mau gosto!",
-    featureDescription: "O quadro que conquistou a internet e virou pilar da mentoria. Karlos Edward analisa moda, estilo e posicionamento de forma direta, ácida e transformadora. Descubra como a sua imagem fala antes de você abrir a boca.",
+    featureDescription: "O quadro que conquistou a internet e virou pilar da mentoria. Max analisa moda, estilo e posicionamento de forma direta, ácida e transformadora. Descubra como a sua imagem fala antes de você abrir a boca.",
     featureImage: mentoria,
     featureEmbedId: "DZ2G18aJQ2q",
     plans: [

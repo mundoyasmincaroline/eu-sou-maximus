@@ -40,7 +40,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-[oklch(0.78_0.13_82/0.1)] px-5 py-6 text-center text-xs text-muted-foreground lg:px-10">
-        © {new Date().getFullYear()} MAXIMUS · Karlos Edward. Todos os direitos reservados.
+        © {new Date().getFullYear()} MAXIMUS · Max. Todos os direitos reservados.
       </div>
     </footer>
   );

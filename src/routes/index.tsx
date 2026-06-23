@@ -11,9 +11,9 @@ import { useCmsContentState } from "@/lib/cmsContent";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "MAXIMUS · Karlos Edward — Apresentador & Influenciador" },
-      { name: "description", content: "Site oficial de Karlos Edward, o MAXIMUS. Apresentador do programa Me Chama Que Eu Vou, host do Maximus Experience Country, mentor e influenciador." },
-      { property: "og:title", content: "MAXIMUS · Karlos Edward" },
+      { title: "MAXIMUS · Max — Apresentador & Influenciador" },
+      { name: "description", content: "Site oficial de Max, o MAXIMUS. Apresentador do programa Me Chama Que Eu Vou, host do Maximus Experience Country, mentor e influenciador." },
+      { property: "og:title", content: "MAXIMUS · Max" },
       { property: "og:description", content: "Apresentador, influenciador, host de eventos e mentor." },
     ],
   }),
@@ -31,6 +31,7 @@ function Home() {
       <ProgramTeaser content={cms} />
       <EventsTeaser content={cms.home} />
       <MentoriaTeaser content={cms.home} />
+      <ReelSection />
       <AgencyTeaser content={cms.home} />
       <Testimonials items={cms.testimonials} />
       <CTASection content={cms.home} />
@@ -121,7 +122,7 @@ function AboutSection({ content }: { content: ReturnType<typeof useCmsContentSta
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-6">
               <div className="text-[10px] uppercase tracking-[0.4em] text-crimson">Apresentador e Mentor</div>
-              <div className="mt-1 font-display text-2xl font-bold">Karlos Edward</div>
+              <div className="mt-1 font-display text-2xl font-bold">Max</div>
             </div>
           </div>
           <div className="absolute -left-4 -top-4 -z-10 hidden h-32 w-32 rounded-full gradient-crimson opacity-40 blur-3xl lg:block" />
@@ -338,6 +339,29 @@ function CTASection({ content }: { content: SiteContent["home"] }) {
               <Instagram className="h-4 w-4" /> @eusoumaximus
             </a>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ReelSection() {
+  return (
+    <section className="mx-auto max-w-7xl px-5 py-24 lg:px-10 lg:py-32">
+      <SectionHeader
+        align="center"
+        eyebrow="Conteúdo Viral"
+        title={<>A Verdade sobre <span className="text-gradient-crimson italic">Posicionamento.</span></>}
+      />
+      <div className="mt-14 flex justify-center">
+        <div className="relative w-full max-w-sm overflow-hidden rounded-3xl shadow-luxe ring-1 ring-crimson/30 bg-black">
+          <iframe
+            src="https://www.instagram.com/p/DIXYnLjuS9X/embed/?theme=dark"
+            className="w-full aspect-[9/16]"
+            frameBorder="0"
+            scrolling="no"
+            allowTransparency={true}
+          ></iframe>
         </div>
       </div>
     </section>
